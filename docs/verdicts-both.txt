@@ -1,0 +1,65 @@
+VERIFIED :: SP-01 :: all :: body ground/ink :: claimed=rgb(248, 246, 242) / rgb(67, 42, 39) measured=rgb(248, 246, 242) / rgb(67, 42, 39) :: PER=PAL Noma Forest Season · D3002 · D3003
+VERIFIED :: SP-01 :: all :: body font-size/line-height :: claimed=17px / 25.5px measured=17px / 25.5px :: PER=D3193 · LAW-37
+VERIFIED :: SP-01 :: all :: body letter-spacing :: claimed=0px measured=normal :: PER=LAW-37
+VERIFIED :: SP-01 :: all :: --d700-stamp on :root :: claimed=D700 · 4 Oct 2026 … measured="D700 · 4 Oct 2026 · 6511 entr :: PER=D4657
+VERIFIED :: SP-01 :: all :: cubic-bezier census :: claimed=2 curves (.165,.84,.44,1) + (.895,.03,.685,.22) measured=cubic-bezier(.165,.84,.44,1) cubic-bezier(.895,.03,.685,.22) :: PER=D3051 · LAW-16 · MK-01
+VERIFIED :: SP-01 :: all :: transition: all absent :: claimed=0 occurrences measured=0 :: PER=LAW-41
+VERIFIED :: SP-01 :: all :: house durations :: claimed=.2s hover / .344s reveal / .2s exit measured=--t-hover:.2s --t-reveal:.344s --t-exit:.2s :: PER=D3052 · D3468 · LAW-28
+VERIFIED :: SP-01 :: all :: reveal declared only inside the no-preference gate :: claimed=media(no-preference) wraps @supports(view()) measured=see stylesheet :: PER=D3453 · D0453 · D2227 · LAW-12
+VERIFIED :: SP-01 :: all :: saturated hues present (chroma > 50) :: claimed=accent rgb(46, 110, 78) + focus + error only measured=rgb(46, 110, 78) | rgb(155, 44, 32) :: PER=D3004 · PALRULE-02 · PALRULE-03
+VERIFIED :: SP-01 :: all :: hover census (49 candidates) :: claimed=transformChanged=0 shadowChanged=0 measured=transformChanged=0 shadowChanged=0 colorChanged=19 :: PER=D3171 · D3052 · LAW-03
+VERIFIED :: SP-01 :: all :: focus-visible ring :: claimed=2px solid rgb(44, 132, 219) offset 2px measured=2px solid rgb(44, 132, 219) offset 2px on BUTTON.copy :: PER=D3007 · D2147 · LAW-32
+VERIFIED :: SP-01 :: all :: prose measure ≤ 65ch :: claimed=≤ 753px measured=642px :: PER=D0076 · PAIR-266
+VERIFIED :: SP-01 :: all :: phone number numerals :: claimed=tabular-nums lining-nums measured=lining-nums tabular-nums :: PER=D0142 · D3017
+VERIFIED :: SP-01 :: all :: sticky header + scroll-timeline hairline :: claimed=sticky, top 0 (env), animation scrolled-line on scroll(root) measured=sticky top 0px anim scrolled-line timeline scroll(root) :: PER=D0201 · D2108 · D4262
+VERIFIED :: SP-01 :: home :: credentials wall :: claimed=7 plates + 1 note, 0 animations measured=8 plates, 0 animated :: PER=D3187 · D3128 · D4653
+VERIFIED :: SP-01 :: home :: service tiles: stretched aria-hidden link + real button :: claimed=6 tiles, all paired measured=6 tiles, paired=true :: PER=D3465 · D2188 · D3428
+VERIFIED :: SP-01 :: home :: testimonial slots are labelled empty states :: claimed=3 slots, no invented quotes measured=3 slots, labelled=true :: PER=D0374 · D0367 · LENS-02
+VERIFIED :: SP-01 :: all :: JSON-LD LocalBusiness + OG 1200×630 + theme-color :: claimed=LocalBusiness, 1200, #f8f6f2 measured=LocalBusiness, 1200, #f8f6f2 :: PER=D1749 · D6548 · D2519
+VERIFIED :: SP-01 :: all :: WCAG contrast of token pairs :: claimed=all ≥ 4.5:1 measured={"body":"12.17","ink2":"7.07","btn":"6.08","foot":"15.69","err":"7.01"} :: PER=D0192 · LENS-15
+VERIFIED :: SP-01 :: gallery :: ratio-locked tiles; native dialog; arrows; Esc; focus return :: claimed=4/3; open→"2 of 9"→"3 of 9"; closed; focus back on tile 1 measured=4 / 3; true/open/2 of 9→3 of 9; false/closed/focus tile 1 :: PER=D2193 · D5639 · D0381 · D0446 · D2324
+VERIFIED :: SP-01 :: contact :: labels above; autocomplete + inputmode; JS-added novalidate :: claimed=label precedes input; name,tel,email,address-level2; tel; novalidate measured=true; name,tel,email,address-level2; tel; true; action=#contact :: PER=D0301 · D2165 · D2160 · D2171
+VERIFIED :: SP-01 :: contact :: error summary on empty submit :: claimed=shown, 4 linked errors, focused measured=shown=true, 4 errors, focus=err-summary :: PER=D0310 · D0895 · D2313
+VERIFIED :: SP-01 :: contact :: submit locks width + disables in flight :: claimed=disabled, width locked, "Sending" measured=true, 143.875px, Sending :: PER=D0265 · D0878
+VERIFIED :: SP-01 :: contact :: named confirmation with next steps + phone :: claimed=shown, focused, states what happens next measured=true, focus=confirm, text=true :: PER=D3792 · LAW-20
+VERIFIED :: SP-01 :: all :: reduced motion: reveal never constructed :: claimed=0 'rise' animations; animation-name none; scroll-behavior auto measured=0; none; auto :: PER=D3453 · LAW-12 · PAIR-25 · D0693
+VERIFIED :: SP-01 :: all (<900px) :: bottom CTA bar pinned, padded by safe-area :: claimed=fixed grid bar, padding-bottom calc(8px + env) measured=fixed grid pb=8px hidden=false :: PER=D0280 · D0552 · D2044
+VERIFIED :: SP-01 :: all (390px) :: no horizontal page scroll :: claimed=scrollWidth ≤ clientWidth measured=390 ≤ 390 :: PER=contract · D2041
+VERIFIED :: SP-01 :: all (390px) :: burger below 900px only :: claimed=nav hidden, drawer shown measured=nav none, drawer block :: PER=D0207 · D2122 · NOPAIR-185
+VERIFIED :: SP-01 :: all (390px) :: every control ≥ 44×44 CSS px :: claimed=0 undersized measured=0 undersized:  :: PER=D0300 · D0551 · LAW-34 · LAW-46
+VERIFIED :: SP-01 :: contact (<900px) :: CTA bar exits while the form is in view :: claimed=hidden=true measured=hidden=true :: PER=PAIR-1132 · D0280
+VERIFIED :: SP-01 :: all :: console/page errors :: claimed=0 measured=0  :: PER=contract
+VERIFIED :: SP-02 :: all :: body ground/ink :: claimed=rgb(15, 21, 18) / rgb(230, 239, 233) measured=rgb(15, 21, 18) / rgb(230, 239, 233) :: PER=PAL Forest Institutional
+VERIFIED :: SP-02 :: all :: body font-size/line-height :: claimed=17px / 25.5px measured=17px / 25.5px :: PER=D3193 · LAW-37
+VERIFIED :: SP-02 :: all :: body letter-spacing :: claimed=0.2px measured=0.2px :: PER=D4307 · PAIR-412
+VERIFIED :: SP-02 :: all :: --d700-stamp on :root :: claimed=D700 · 4 Oct 2026 … measured="D700 · 4 Oct 2026 · 6511 entr :: PER=D4657
+VERIFIED :: SP-02 :: all :: color-scheme :: claimed=dark measured=dark :: PER=D0155 · D2519
+VERIFIED :: SP-02 :: all :: cubic-bezier census :: claimed=2 curves (.165,.84,.44,1) + (.895,.03,.685,.22) measured=cubic-bezier(.165,.84,.44,1) cubic-bezier(.895,.03,.685,.22) :: PER=D3051 · LAW-16 · MK-01
+VERIFIED :: SP-02 :: all :: transition: all absent :: claimed=0 occurrences measured=0 :: PER=LAW-41
+VERIFIED :: SP-02 :: all :: house durations :: claimed=.2s hover / .344s reveal / .2s exit measured=--t-hover:.2s --t-reveal:.344s --t-exit:.2s :: PER=D3052 · D3468 · LAW-28
+VERIFIED :: SP-02 :: all :: reveal declared only inside the no-preference gate :: claimed=media(no-preference) wraps @supports(view()) measured=see stylesheet :: PER=D3453 · D0453 · D2227 · LAW-12
+VERIFIED :: SP-02 :: all :: saturated hues present (chroma > 50) :: claimed=accent rgb(111, 169, 138) + chrome rgb(46, 110, 78) + focus + error only measured=rgb(111, 169, 138) | rgb(46, 110, 78) | rgb(240, 160, 151) :: PER=D3004 · PALRULE-02 · PALRULE-03 · CPAIR-09
+VERIFIED :: SP-02 :: all :: hover census (49 candidates) :: claimed=transformChanged=0 shadowChanged=0 measured=transformChanged=0 shadowChanged=0 colorChanged=19 :: PER=D3171 · D3052 · LAW-03
+VERIFIED :: SP-02 :: all :: focus-visible ring :: claimed=2px solid rgb(124, 184, 255) offset 2px measured=2px solid rgb(124, 184, 255) offset 2px on BUTTON.copy :: PER=D3007 · D2147 · LAW-32
+VERIFIED :: SP-02 :: all :: prose measure ≤ 65ch :: claimed=≤ 765px measured=752px :: PER=D0076 · PAIR-266
+VERIFIED :: SP-02 :: all :: phone number numerals :: claimed=tabular-nums lining-nums measured=lining-nums tabular-nums :: PER=D0142 · D3017
+VERIFIED :: SP-02 :: all :: sticky header + scroll-timeline hairline :: claimed=sticky, top 0 (env), animation scrolled-line on scroll(root) measured=sticky top 0px anim scrolled-line timeline scroll(root) :: PER=D0201 · D2108 · D4262
+VERIFIED :: SP-02 :: home :: credentials wall :: claimed=7 plates + 1 note, 0 animations measured=8 plates, 0 animated :: PER=D3187 · D3128 · D4653
+VERIFIED :: SP-02 :: home :: service tiles: stretched aria-hidden link + real button :: claimed=6 tiles, all paired measured=6 tiles, paired=true :: PER=D3465 · D2188 · D3428
+VERIFIED :: SP-02 :: home :: testimonial slots are labelled empty states :: claimed=3 slots, no invented quotes measured=3 slots, labelled=true :: PER=D0374 · D0367 · LENS-02
+VERIFIED :: SP-02 :: all :: JSON-LD LocalBusiness + OG 1200×630 + theme-color :: claimed=LocalBusiness, 1200, #0F1512 measured=LocalBusiness, 1200, #0F1512 :: PER=D1749 · D6548 · D2519
+VERIFIED :: SP-02 :: all :: WCAG contrast of token pairs :: claimed=all ≥ 4.5:1 measured={"body":"15.74","ink2":"8.94","btn":"6.79","foot":"16.46","err":"8.96"} :: PER=D0192 · LENS-15
+VERIFIED :: SP-02 :: gallery :: ratio-locked tiles; native dialog; arrows; Esc; focus return :: claimed=4/3; open→"2 of 9"→"3 of 9"; closed; focus back on tile 1 measured=4 / 3; true/open/2 of 9→3 of 9; false/closed/focus tile 1 :: PER=D2193 · D5639 · D0381 · D0446 · D2324
+VERIFIED :: SP-02 :: contact :: labels above; autocomplete + inputmode; JS-added novalidate :: claimed=label precedes input; name,tel,email,address-level2; tel; novalidate measured=true; name,tel,email,address-level2; tel; true; action=#contact :: PER=D0301 · D2165 · D2160 · D2171
+VERIFIED :: SP-02 :: contact :: error summary on empty submit :: claimed=shown, 4 linked errors, focused measured=shown=true, 4 errors, focus=err-summary :: PER=D0310 · D0895 · D2313
+VERIFIED :: SP-02 :: contact :: submit locks width + disables in flight :: claimed=disabled, width locked, "Sending" measured=true, 146.281px, Sending :: PER=D0265 · D0878
+VERIFIED :: SP-02 :: contact :: named confirmation with next steps + phone :: claimed=shown, focused, states what happens next measured=true, focus=confirm, text=true :: PER=D3792 · LAW-20
+VERIFIED :: SP-02 :: home :: comparison slider: native range drives --split; two frames; no animation :: claimed=70% after input; 2 slots; range; 0 animations measured=70%; 2; range; 0 :: PER=D0421 · LAW-15 · D2744
+VERIFIED :: SP-02 :: all :: alpha lines, derived surface step, 1px ring not shadow :: claimed=--line rgb(230 239 233/.11); --surface-2 color-mix; tile inset ring measured=rgb(230 239 233 / .11); color-mix(in srgb, #18211C, #E6EFE9 5%); rgba(230, 239, 233, 0.11) 0px 0px 0px 1px inset :: PER=D4198 · D4268 · LAW-35 · PALRULE-05
+VERIFIED :: SP-02 :: all :: reduced motion: reveal never constructed :: claimed=0 'rise' animations; animation-name none; scroll-behavior auto measured=0; none; auto :: PER=D3453 · LAW-12 · PAIR-25 · D0693
+VERIFIED :: SP-02 :: all (<900px) :: bottom CTA bar pinned, padded by safe-area :: claimed=fixed grid bar, padding-bottom calc(8px + env) measured=fixed grid pb=8px hidden=false :: PER=D0280 · D0552 · D2044
+VERIFIED :: SP-02 :: all (390px) :: no horizontal page scroll :: claimed=scrollWidth ≤ clientWidth measured=390 ≤ 390 :: PER=contract · D2041
+VERIFIED :: SP-02 :: all (390px) :: burger below 900px only :: claimed=nav hidden, drawer shown measured=nav none, drawer block :: PER=D0207 · D2122 · NOPAIR-185
+VERIFIED :: SP-02 :: all (390px) :: every control ≥ 44×44 CSS px :: claimed=0 undersized measured=0 undersized:  :: PER=D0300 · D0551 · LAW-34 · LAW-46
+VERIFIED :: SP-02 :: contact (<900px) :: CTA bar exits while the form is in view :: claimed=hidden=true measured=hidden=true :: PER=PAIR-1132 · D0280
+VERIFIED :: SP-02 :: all :: console/page errors :: claimed=0 measured=0  :: PER=contract
