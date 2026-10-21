@@ -90,6 +90,9 @@ PADDOCK = {
   "marginalia": ["D0098","D0433","D0140","LENS-14","LENS-02"],
   "frame": ["D0041","D0433","D3813","LENS-07"],
   "ledger": ["D0142","D0041","PAIR-794"],
+  # v3 — the card colourway
+  "logo": ["D0443","D0401","D0448","D0404","D0408","LENS-14"],
+  "brand": ["D0159","D0049","D5303","D3399","D3876","D0107","D0106","D1350","D3373","PAIR-184","PAIR-982","LAW-83","LAW-06","PALRULE-05","LENS-14","LENS-02"],
 }
 
 NIGHT = {

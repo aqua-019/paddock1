@@ -32,24 +32,33 @@ def per(key):
 
 # ---------------------------------------------------------------- tokens + stylesheet
 TOKENS = """
+  /* PALCAND "FFH Card" — sampled from the client's card: green #1b2622, gold #a07a48, champagne #cdb682, near-white type; ground kept from PAL Noma Forest Season */
   --bg:#f8f6f2; --surface:#f1eee8; --surface-2:color-mix(in srgb, var(--bg), var(--ink) 7%);
-  --ink:#432a27; --ink-2:#664e49; --ink-3:#bfaea3;
-  --accent:#2E6E4E; --accent-ink:#ffffff; --chrome:var(--ink);
+  --ink:#1b2622; --ink-2:color-mix(in srgb, var(--ink) 72%, var(--bg)); --ink-3:color-mix(in srgb, var(--ink) 38%, var(--bg));
+  --chrome:#1b2622; --chrome-2:color-mix(in srgb, var(--chrome), #ffffff 7%);
+  --gold:#a07a48; --gold-light:#cdb682; --gold-ink:color-mix(in srgb, var(--gold), var(--ink) 32%);
+  --accent:color-mix(in srgb, var(--chrome), #ffffff 12%); --accent-ink:#f8f6f2;
   --line:color-mix(in srgb, var(--ink) 15%, transparent); --line-strong:color-mix(in srgb, var(--ink) 40%, transparent);
   --wash:color-mix(in srgb, var(--ink) 8%, transparent); --wash-press:color-mix(in srgb, var(--ink) 16%, transparent);
-  --accent-hover:color-mix(in srgb, var(--accent), var(--ink) 10%); --accent-press:color-mix(in srgb, var(--accent), var(--ink) 18%);
-  --focus:#2c84db; --err:#9b2c20; --ok:#2E6E4E;
-  --foot-bg:#2c1714; --foot-ink:#f8f6f2; --foot-line:color-mix(in srgb, #f8f6f2 18%, transparent);
+  --accent-hover:color-mix(in srgb, var(--accent), #ffffff 8%); --accent-press:color-mix(in srgb, var(--accent), var(--ink) 18%);
+  --focus:#2c84db; --focus-dark:#7cb8ff; --err:#9b2c20; --ok:#2E6E4E;
+  --foot-bg:var(--chrome); --foot-ink:#f8f6f2; --foot-line:color-mix(in srgb, #f8f6f2 18%, transparent);
   --grain-blend:multiply; --grain-alpha:.16; --body-track:0; --ring:none;
-  --scrim:linear-gradient(to top, rgb(44 23 20 / .78), rgb(44 23 20 / 0) 70%);
-  --sp:"SP-01b PADDOCK";
+  --scrim:linear-gradient(to top, rgb(27 38 34 / .82), rgb(27 38 34 / 0) 70%);
+  --sp:"SP-01c PADDOCK";
 """
 GRAIN = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E"
          "%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E"
          "%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1 0'/%3E%3C/filter%3E"
          "%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")
-TOPO_SVG = topo.contour_svg(seed=SEED)
+TOPO_SVG = topo.contour_svg(seed=SEED, color='#1b2622')
 TOPO_URI = topo.svg_data_uri(TOPO_SVG) if ARTIFACT else '/topo-tile.svg'
+import base64
+def asset(path):
+    """Brand asset URL: a site path, or a data URI in the single-file artifact build."""
+    if not ARTIFACT: return path
+    p = PUB / path.lstrip('/'); mime = 'image/png' if p.suffix == '.png' else 'image/jpeg'
+    return f'data:{mime};base64,' + base64.b64encode(p.read_bytes()).decode()
 css = (CSS.replace('@@TOKENS@@', TOKENS).replace('@@STAMP@@', STAMP).replace('@@GRAIN@@', GRAIN)
           .replace('@@TOPO@@', TOPO_URI).replace('@@SCHEME@@', 'light'))
 css += """
@@ -117,9 +126,9 @@ def contact_line():
         <div class="kv"><b>{ico("i-ext")}Follow</b><span><a href="{S['instagram']}" target="_blank" rel="noopener">Instagram</a> · <a href="{S['facebook']}" target="_blank" rel="noopener">Facebook</a></span></div>
       </div>'''
 
-def cta_row(extra_style=''):
+def cta_row(extra_style='', gold=False):
     return f'''<div class="cta-row"{per("cta")}>
-        <a class="btn btn-primary" href="{href('contact','enquiry')}"{route_attr('contact')} data-focus="enquiry">Request a quote</a>
+        <a class="btn {'btn-gold' if gold else 'btn-primary'}" href="{href('contact','enquiry')}"{route_attr('contact')} data-focus="enquiry">Request a quote</a>
         <a class="btn btn-secondary num" href="tel:{S['phone_e164']}"{extra_style}>Call {S['phone_display']}</a>
       </div>'''
 
@@ -128,11 +137,10 @@ def header(current):
 <div class="skips"{per("skip")}><a href="#main">Skip to content</a><a href="{href('contact','enquiry')}"{route_attr('contact')}>Skip to contact</a></div>
 <header class="site-head"{per("header")}>
   <div class="wrap">
-    <div class="logo-slot" aria-hidden="true">Logo slot</div>
-    <a class="wordmark" href="{href('home')}"{route_attr('home')}{per("wordmark")}><b>{esc(S['name'])}</b><small>{esc(S['tagline'])}</small></a>
+    <a class="logo" href="{href('home')}"{route_attr('home')}{per("wordmark")}{per("logo")}><img src="{asset('/brand/logo-lockup.png')}" alt="{esc(S['name'])} — {esc(S['tagline'])}" width="640" height="181" decoding="async" fetchpriority="high"></a>
     {north()}
-    <nav class="nav" aria-label="Primary"{per("nav")}><ul>{nav_links(current)}<li class="nav-cta"><a class="btn btn-primary" href="{href('contact','enquiry')}"{route_attr('contact')} data-focus="enquiry" style="min-height:44px;padding-inline:16px">Request a quote</a></li></ul></nav>
-    <details class="drawer" id="drawer"{per("burger")}><summary aria-label="Menu">Menu</summary><ul>{nav_links(current)}<li><a href="{href('contact','enquiry')}"{route_attr('contact')} data-focus="enquiry" style="color:var(--accent);font-weight:700">Request a quote</a></li></ul></details>
+    <nav class="nav" aria-label="Primary"{per("nav")}><ul>{nav_links(current)}<li class="nav-cta"><a class="btn btn-gold" href="{href('contact','enquiry')}"{route_attr('contact')} data-focus="enquiry" style="min-height:44px;padding-inline:16px">Request a quote</a></li></ul></nav>
+    <details class="drawer" id="drawer"{per("burger")}><summary aria-label="Menu">Menu</summary><ul>{nav_links(current)}<li><a href="{href('contact','enquiry')}"{route_attr('contact')} data-focus="enquiry" style="color:var(--gold-light);font-weight:700">Request a quote</a></li></ul></details>
   </div>
 </header>'''
 
@@ -143,7 +151,7 @@ def footer():
   <div class="wrap">
     <div class="cols">
       <div class="stack" style="--gap:12px">
-        <a class="wordmark" href="{href('home')}"{route_attr('home')} style="color:inherit"><b>{esc(S['name'])}</b><small style="color:color-mix(in srgb, var(--foot-ink) 65%, transparent)">{esc(S['tagline'])}</small></a>
+        <a class="logo foot-logo" href="{href('home')}"{route_attr('home')}{per("logo")}><img src="{asset('/brand/logo-lockup.png')}" alt="{esc(S['name'])} — {esc(S['tagline'])}" width="640" height="181" loading="lazy" decoding="async"></a>
         <p class="small" style="max-width:36ch">Licensed, insured feral animal control for farmers and landholders across {esc(S['region'])}.</p>
         <p class="small num">{S['phone_display']} · {S['email']}</p>
       </div>
@@ -168,7 +176,7 @@ def varbar():
     return f'''
 <div class="varbar" id="varbar"{per("varbar")} role="region" aria-label="Mockup controls">
   <div class="wrap">
-    <span><strong>D700 mockup · SP-01b PADDOCK v2</strong><span class="long"> · PAL Noma Forest Season · topographic sheet layer · seed {esc(SEED)}</span></span>
+    <span><strong>D700 mockup · SP-01c PADDOCK v3</strong><span class="long"> · card colourway (green · gold · cream) on the topographic sheet · seed {esc(SEED)}</span></span>
     <span class="grow"></span>
     <button type="button" id="t-motion" aria-pressed="false" title="Emulates the reduced-motion twin (D4980); the real gate is the media query (D3453)"><span class="long">Motion: on</span><span class="short">Motion</span></button>
     <button type="button" id="t-topo" aria-pressed="true" title="Toggle the contour field and grid (D2410) to compare against v1"><span class="long">Sheet: on</span><span class="short">Sheet</span></button>
@@ -180,7 +188,7 @@ def varbar():
 </div>'''
 
 def spec_dialog():
-    spfile = (ROOT / 'docs' / 'SP-01b-ffh-paddock-v2.md')
+    spfile = (ROOT / 'docs' / 'SP-01c-ffh-paddock-v3.md')
     spfile = spfile.read_text() if spfile.exists() else '(SP record not found in docs/)'
     allids = []
     for grp in (cites.SHARED, X, cites.TOP):
@@ -197,7 +205,7 @@ def spec_dialog():
     counts = f'''<span>{len(d_entries)} entries</span><span>{len(laws)} laws</span><span>{len(pairs)} pairs</span><span>{len(nopairs)} anti-pairs resolved</span><span>{len(pals)} palette records</span><span>{len(lenses)} doctrine records</span><span>{len(tops)} templates/dynamics/kits</span><span>{len(uniq)} citations total</span>'''
     return f'''
 <dialog class="spec" id="spec"{per("spec")} aria-labelledby="spec-title">
-  <div class="bar"><h2 id="spec-title">SP-01b · PADDOCK v2 · spec sheet</h2><button type="button" class="btn btn-secondary" id="spec-close" aria-label="Close spec sheet">&times;</button></div>
+  <div class="bar"><h2 id="spec-title">SP-01c · PADDOCK v3 · spec sheet</h2><button type="button" class="btn btn-secondary" id="spec-close" aria-label="Close spec sheet">&times;</button></div>
   <div class="inner">
     <p class="counts">{counts}</p>
     <p>Compiled against <span class="mono">{esc(STAMP)}</span>. Every component on the page carries a <span class="mono">data-per</span> attribute naming the records it honours; switch on X-ray and hover any outlined component to read them. The v2 delta adds the topographic sheet layer: a seeded contour field (seed <span class="mono">{esc(SEED)}</span>, same hills on every build), an MGA-style 1 km grid, real zone-55 grid references for the base and every locality, scale bars, a map key, marginalia and photo registration frames. Nothing on the layer animates and no new hue was added.</p>
@@ -210,7 +218,7 @@ def spec_dialog():
     <h3>Entries ({len(d_entries)})</h3><ul class="ids">{ids_li}</ul>
     <h3>Surface plan record</h3><pre>{esc(spfile)}</pre>
     <h3>What Fitz supplies before launch</h3>
-    <ul style="margin:0;padding-left:18px;display:grid;gap:4px"><li>Logo (SVG or high-res PNG) for the header slot.</li><li>Photos: hero, two about shots, nine gallery shots at 1600px wide, with a one-line description each for alt text.</li><li>Instagram bio wording for the hero lede.</li><li>Testimonials with name, property type and locality (or a Google Business reviews link).</li><li>Pricing line for the first FAQ, ABN for the footer, and whether thermal drone services stay on the Services page.</li></ul>
+    <ul style="margin:0;padding-left:18px;display:grid;gap:4px"><li>A vector or larger logo file if one exists (the current lockup is cut from the card).</li><li>Photos: hero, two about shots, nine gallery shots at 1600px wide, with a one-line description each for alt text.</li><li>Instagram bio wording for the hero lede.</li><li>Testimonials with name, property type and locality (or a Google Business reviews link).</li><li>Pricing line for the first FAQ, ABN for the footer, and whether thermal drone services stay on the Services page.</li></ul>
   </div>
 </dialog>'''
 
@@ -323,6 +331,7 @@ def home_body():
       <p class="eyebrow"{per("wordmark")}>{esc(S['base'])} · Gippsland · Regional Victoria</p>
       <h1 id="h-home" tabindex="-1">{esc(S['headline'])}</h1>
       <p class="lede"{per("lede")}>{esc(S['lede'])}{lede_flag}</p>
+      <p class="descriptors"{per("brand")}>{' <span aria-hidden="true">·</span> '.join(esc(x) for x in S['descriptors'])}</p>
       {cta_row()}
       {contact_line()}
     </div>
@@ -385,7 +394,7 @@ def home_body():
 <section class="band invert"{per("strip")}>
   <div class="wrap stack" style="--gap:20px">
     <h2 style="max-width:16ch">Got deer on the fence line? Get in touch.</h2>
-    {cta_row(' style="border-color:var(--foot-line);color:var(--foot-ink)"')}
+    {cta_row(' style="border-color:var(--foot-line);color:var(--foot-ink)"', gold=True)}
     <p class="caption">{S['email']} · Instagram {esc(S['instagram_handle'])} · Facebook {esc(S['facebook_label'])}</p>
   </div>
 </section>'''
@@ -445,6 +454,7 @@ def about_body():
         <h3>Credentials</h3>
         <ul class="ledger num"{per("ledger")}>{ledger}</ul>
         <p class="caption">Credentials current as at {cur}. Certificates of currency supplied on request before work starts.</p>
+        <figure class="card-figure"{per("brand")}><img src="{asset('/brand/fitz-card.jpg')}" alt="The Fitz Feral Hunters card: rifle mark, Protecting Victoria's Farms, contract pest control, deer and feral management, thermal hunting, farm security, fully insured, 0499 866 580" width="1280" height="755" loading="lazy" decoding="async"><figcaption class="caption">The card, as supplied. The site's green, gold and cream are sampled from it.</figcaption></figure>
         <div class="grid grid-2" style="margin-top:8px">{slot(*a1)}{slot(*a2)}</div>
       </div>
       {margin_notes('about')}
@@ -650,9 +660,9 @@ def document(key, body, title, desc):
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
-{robots}<meta name="theme-color" content="#f8f6f2">
+{robots}<meta name="theme-color" content="#1b2622">
 <link rel="canonical" href="{canonical}">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.png" type="image/png" sizes="64x64">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{esc(S['name'])}">
 <meta property="og:title" content="{esc(title)}">
@@ -662,7 +672,7 @@ def document(key, body, title, desc):
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap">
 <style>{sheet_css}</style>
 <script type="application/ld+json">{jsonld()}</script>
 </head>
@@ -683,9 +693,9 @@ def artifact_document():
     return f'''<title>Fitz Feral Hunters Paddock</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="{esc(TITLES['home'][1])}">
-<meta name="theme-color" content="#f8f6f2">
+<meta name="theme-color" content="#1b2622">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap">
 <style>{sheet_css}</style>
 <script type="application/ld+json">{jsonld()}</script>
 {SPRITE}{varbar()}{header(None)}

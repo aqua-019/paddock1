@@ -1,0 +1,24 @@
+# SP-01c · Fitz Feral Hunters · PADDOCK v3 — the card colourway (diff-mode SP, D700 §0D)
+
+Compiled against: STAMP :: D700 · 4 Oct 2026 · 6511 entries D0001-D6558 · 218 laws · 387 capsules · 466 groups · 1824 pairs · 499 anti-pairs · 457 palettes · 21 lenses
+Measured state before the diff: SP-01b (topographic sheet layer), 17/17 VERIFIED. The client supplied the business card (dark green, gold, near-white type, rifle mark, Trajan-style capitals) and asked for the mockup adapted to that colourway with the logo on the site.
+Lenses: LENS-14 leads (the brand is the place's own artefact; the card is the one reference), LENS-02 (colours sampled, not eyeballed; the card shown as supplied), LENS-12 still governs density, LENS-04 the controls. TENSION-05: universal grid, local parameters — the sheet layer is untouched, only the tokens and the display face move.
+
+PALCAND "FFH Card" :: BG #f8f6f2 (kept from PAL Noma Forest Season) · SURFACE #f1eee8 · INK #1b2622 (card green, sampled rgb 27 38 34) · CHROME #1b2622 for header, footer and the invert band · GOLD #a07a48 (the card's "Fitz" and rifle wood, rgb 160 122 72) · GOLD-LIGHT #cdb682 (the insured line, rgb 205 182 130) · GOLD-INK = color-mix(gold, ink 32%) for small text on cream · ACCENT (primary action on light) = color-mix(chrome, white 12%) · functional focus #2c84db / #7cb8ff, error #9b2c20, ok #2E6E4E.
+Budget (PALRULE-02): green = ink, chrome and the primary action; gold = the trust semantic only (credential and triad overlines, the cred-strip rule, footer labels, nav current state) and, as a designed twin (D3399, PALRULE-05), the primary action on dark bands where the green button would vanish. No third hue.
+
+SP-01c :: Fitz Feral Hunters :: SURFACES=all (delta only) :: CITES=SP-01 + SP-01b plus D0159 (Content-extracted accents) · D0049 (Duotone identity) · D5303 (Inverse-pair section theming) · D3399 (Interactive accent twin) · D3876 (Monochrome admin brand fill) · PAIR-184 · PAIR-982 · D0107 (Serif revival editorial) [display face: Cinzel, the open equivalent of the card's inscriptional capitals; body stays Barlow] · D0106 (Display + body pairing) · D1350 (Type licensing audit) · D3373 (Mode-invariant brand accent) · LAW-83 · LAW-06 · PALRULE-05 · D0443 (Descriptive alt strategy) · D0448 (Priority hint preloading) · LENS-14 · LENS-02 :: FLOOR=unchanged + 10 delta asserts
+
+## ASSERT lines (delta)
+ASSERT :: all :: header and footer ground = #1b2622, the card's green; body ink = #1b2622 on #f8f6f2 :: PER=D5303 (Inverse-pair section theming) · D0159 (Content-extracted accents) · PAIR-982
+ASSERT :: all :: the logo lockup renders in the header (56px tall) and footer from /brand/logo-lockup.png with a descriptive alt; the card itself appears on About as supplied :: PER=D0443 (Descriptive alt strategy) · D0448 (Priority hint preloading) · LENS-02
+ASSERT :: all :: saturated-hue census = {green family, gold #a07a48, champagne #cdb682, focus, error, ok} and nothing else :: PER=D3004 (One reserved accent) · PALRULE-02 · D0049 (Duotone identity)
+ASSERT :: all :: gold text appears on cream only as --gold-ink (≥ 4.5:1) and on green only as --gold-light (≥ 6:1); raw #a07a48 never carries small text on cream :: PER=D0192 (APCA contrast pairing) · LENS-15
+ASSERT :: all :: contrast: body ≥ 12:1, nav text on chrome ≥ 12:1, gold button ≥ 7:1 (measured 7.9), green button ≥ 9:1, gold-ink descriptors ≥ 4.5:1 :: PER=D0192 (APCA contrast pairing) · LENS-15
+ASSERT :: all :: one primary button on light (green) and its designed twin on dark (champagne gold); no third button fill :: PER=D3399 (Interactive accent twin) · PALRULE-05 · D3876 (Monochrome admin brand fill) · PAIR-184
+ASSERT :: all :: h1/h2 in Cinzel 700 uppercase; h3, plates and body in Barlow; exactly three families loaded, all SIL OFL :: PER=D0106 (Display + body pairing) · D0107 (Serif revival editorial) · D1350 (Type licensing audit)
+ASSERT :: all :: the contour tile is re-inked #1b2622 at the same .075/.12 alphas; the seed and geometry are unchanged :: PER=D2410 (Contour isoline plot) · LAW-10
+ASSERT :: all :: hover census still transformChanged = 0, shadowChanged = 0; focus rings flip to #7cb8ff on the dark bands :: PER=D3171 (No-transform hover discipline) · LAW-83 · D3007 (Focus colour outside the palette)
+ASSERT :: all :: brand assets: lockup PNG ≤ 60 KB, card JPG ≤ 120 KB, loaded once; index.html ≤ 120 KB :: PER=D4987 (Carbon-Aware Interface Budget) · LENS-06
+
+MEASURE :: probe rounds=2 (round 1: 3 flagged — the derived gold-ink counted as a third hue, the gold-button claim was set at 9:1 against a measured 7.9:1, and the focus probe tabbed into the reviewer bar; two were probe corrections, one an over-claimed number) · final pass rate=12/12 · weight: index 107 KB, lockup 50 KB, card 116 KB · rig: Playwright Chromium against a local http serve of public/

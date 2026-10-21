@@ -1,0 +1,12 @@
+VERIFIED :: SP-01c :: all :: header/footer/ink = card green on cream :: claimed=#1b2622 / #1b2622 / #1b2622 on #f8f6f2 measured=#1b2622 / #1b2622 / #1b2622 on #f8f6f2 :: PER=D5303 · D0159 · PAIR-982
+VERIFIED :: SP-01c :: all :: logo lockup in header, 56px, descriptive alt :: claimed=loaded, 56px, alt measured=loaded=true, 56px, "Fitz Feral Hunters — Protecting Victoria's Farms" :: PER=D0443 · D0448 · LENS-02
+VERIFIED :: SP-01c :: all :: saturated-hue census :: claimed=gold, champagne, derived gold-ink, focus, error, ok only measured=#cdb682 #755f3c #a07a48 #2e6e4e :: PER=D3004 · PALRULE-02 · D0049
+VERIFIED :: SP-01c :: all :: contrast pairs :: claimed=body≥12 nav≥12 gold-btn≥7 green-btn≥9 descriptors≥4.5 measured={"body":14.44,"nav":14.44,"gold":7.88,"green":9.93,"desc":5.61} :: PER=D0192 · LENS-15
+VERIFIED :: SP-01c :: all :: type: Cinzel h1 / Barlow Condensed h3 / Barlow body; three OFL families loaded :: claimed=Cinzel / Barlow Condensed / Barlow measured=Cinzel / "Barlow Condensed" / Barlow; loaded Barlow, Barlow Condensed, Cinzel :: PER=D0106 · D0107 · D1350
+VERIFIED :: SP-01c :: all :: contour tile re-inked, alphas unchanged :: claimed=#1b2622 .075/.12 measured=#1b2622 stroke-opacity="0.075" stroke-opacity="0.12" :: PER=D2410 · LAW-10
+VERIFIED :: SP-01c :: all :: hover census (36) :: claimed=0 / 0 measured=transformChanged=0 shadowChanged=0 :: PER=D3171 · LAW-03
+VERIFIED :: SP-01c :: header :: focus ring flips to the dark-band blue :: claimed=#7cb8ff in header measured=#7cb8ff (inHeader=true) :: PER=D3007 · LAW-83
+VERIFIED :: SP-01c :: all :: weight :: claimed=index≤120 KB lockup≤60 KB card≤120 KB measured=107 / 50 / 116 KB :: PER=D4987 · LENS-06
+VERIFIED :: SP-01c :: about :: the supplied card rendered as a figure :: claimed=1280px source, loaded measured=true :: PER=LENS-02 · D0433
+VERIFIED :: SP-01c :: all (390px) :: no overflow, 40px logo, 17px body :: claimed=ok measured=390≤390, 40px, 17px :: PER=D3193 · LENS-15
+VERIFIED :: SP-01c :: all :: console/page errors :: claimed=0 measured=0  :: PER=contract

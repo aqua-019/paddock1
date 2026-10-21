@@ -1,7 +1,8 @@
 {
   "_comment": "Edit this file, run `python3 src/build.py`, commit — everything on the site that mentions contact details, credentials, services or localities is generated from here.",
   "name": "Fitz Feral Hunters",
-  "tagline": "Pest & vermin control · Gippsland",
+  "tagline": "Protecting Victoria's Farms",
+  "descriptors": ["Contract pest control", "Deer & feral management", "Thermal hunting", "Farm security"],
   "url": "https://fitzferalhunters.com.au",
   "indexable": false,
   "phone_display": "0499 866 580",

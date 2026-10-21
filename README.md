@@ -15,7 +15,8 @@ src/topo.py         ← seeded contour tile (periodic noise + marching squares) 
 src/cites.py        ← catalogue citations per component
 public/             ← the deployed site (generated, committed so Vercel needs no build step)
 api/enquiry.js      ← Vercel function behind the contact form
-docs/               ← SP-01 record, probe verdicts, FOLD lines
+docs/               ← SP-01 / SP-01b / SP-01c records, probe verdicts, FOLD lines
+public/brand/       ← logo lockup (keyed PNG for dark bands, JPG plate), rifle mark, the card as supplied
 ```
 
 ## Editing content

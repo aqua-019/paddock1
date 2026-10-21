@@ -6,9 +6,9 @@
 <title>About · Fitz Feral Hunters</title>
 <meta name="description" content="Based in Warragul, working across Gippsland and regional Victoria. Licensed, insured, accountable. AHCPMG304 humane dispatch.">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#f8f6f2">
+<meta name="theme-color" content="#1b2622">
 <link rel="canonical" href="https://fitzferalhunters.com.au/about">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.png" type="image/png" sizes="64x64">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Fitz Feral Hunters">
 <meta property="og:title" content="About · Fitz Feral Hunters">
@@ -18,53 +18,57 @@
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap">
 <style>
 /* Layout: one calm document, five landmark sections hash-routed; fluid headings on a fixed 17px body; one accent, one hover verb (recolour), one curve pair; cascade in named layers. */
 @layer base, components, chrome, review, print;
 :root{
 
+  /* PALCAND "FFH Card" — sampled from the client's card: green #1b2622, gold #a07a48, champagne #cdb682, near-white type; ground kept from PAL Noma Forest Season */
   --bg:#f8f6f2; --surface:#f1eee8; --surface-2:color-mix(in srgb, var(--bg), var(--ink) 7%);
-  --ink:#432a27; --ink-2:#664e49; --ink-3:#bfaea3;
-  --accent:#2E6E4E; --accent-ink:#ffffff; --chrome:var(--ink);
+  --ink:#1b2622; --ink-2:color-mix(in srgb, var(--ink) 72%, var(--bg)); --ink-3:color-mix(in srgb, var(--ink) 38%, var(--bg));
+  --chrome:#1b2622; --chrome-2:color-mix(in srgb, var(--chrome), #ffffff 7%);
+  --gold:#a07a48; --gold-light:#cdb682; --gold-ink:color-mix(in srgb, var(--gold), var(--ink) 32%);
+  --accent:color-mix(in srgb, var(--chrome), #ffffff 12%); --accent-ink:#f8f6f2;
   --line:color-mix(in srgb, var(--ink) 15%, transparent); --line-strong:color-mix(in srgb, var(--ink) 40%, transparent);
   --wash:color-mix(in srgb, var(--ink) 8%, transparent); --wash-press:color-mix(in srgb, var(--ink) 16%, transparent);
-  --accent-hover:color-mix(in srgb, var(--accent), var(--ink) 10%); --accent-press:color-mix(in srgb, var(--accent), var(--ink) 18%);
-  --focus:#2c84db; --err:#9b2c20; --ok:#2E6E4E;
-  --foot-bg:#2c1714; --foot-ink:#f8f6f2; --foot-line:color-mix(in srgb, #f8f6f2 18%, transparent);
+  --accent-hover:color-mix(in srgb, var(--accent), #ffffff 8%); --accent-press:color-mix(in srgb, var(--accent), var(--ink) 18%);
+  --focus:#2c84db; --focus-dark:#7cb8ff; --err:#9b2c20; --ok:#2E6E4E;
+  --foot-bg:var(--chrome); --foot-ink:#f8f6f2; --foot-line:color-mix(in srgb, #f8f6f2 18%, transparent);
   --grain-blend:multiply; --grain-alpha:.16; --body-track:0; --ring:none;
-  --scrim:linear-gradient(to top, rgb(44 23 20 / .78), rgb(44 23 20 / 0) 70%);
-  --sp:"SP-01b PADDOCK";
+  --scrim:linear-gradient(to top, rgb(27 38 34 / .82), rgb(27 38 34 / 0) 70%);
+  --sp:"SP-01c PADDOCK";
 
   --d700-stamp:"D700 · 4 Oct 2026 · 6511 entries D0001-D6558 · 218 laws · 387 capsules · 466 groups · 1824 pairs · 499 anti-pairs · 457 palettes · 21 lenses";
-  --font-display:"Barlow Condensed","Arial Narrow","Helvetica Neue",system-ui,sans-serif;
+  --font-display:"Cinzel","Trajan Pro","Palatino Linotype",Georgia,serif;
+  --font-cond:"Barlow Condensed","Arial Narrow","Helvetica Neue",system-ui,sans-serif;
   --font-body:"Barlow",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   --font-mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
   --ease-out:cubic-bezier(.165,.84,.44,1); --ease-in:cubic-bezier(.895,.03,.685,.22);
   --t-hover:.2s; --t-reveal:.344s; --t-exit:.2s;
   --fs-body:17px; --lh-body:1.5; --fs-small:15px; --fs-caption:13px;
-  --fs-h1:clamp(2.75rem, 1.5rem + 5vw, 5.25rem);
-  --fs-h2:clamp(1.9rem, 1.3rem + 2.4vw, 3rem);
+  --fs-h1:clamp(2rem, 1.1rem + 3.4vw, 3.6rem);
+  --fs-h2:clamp(1.5rem, 1.1rem + 1.6vw, 2.25rem);
   --fs-h3:clamp(1.3rem, 1.15rem + .7vw, 1.6rem);
   --fs-eyebrow:13px;
   --gutter-l:max(16px, env(safe-area-inset-left, 0px)); --gutter-r:max(16px, env(safe-area-inset-right, 0px));
-  --radius:4px; --measure:65ch; --head-h:64px; --wrap:1180px;
+  --radius:4px; --measure:65ch; --head-h:76px; --wrap:1180px;
   color-scheme:light;
   interpolate-size:allow-keywords;
 }
 
 /* body stays unlayered: the publish skeleton's own unlayered body reset would otherwise outrank a layered rule */
 body{margin:0;background:var(--bg);color:var(--ink);font:400 var(--fs-body)/var(--lh-body) var(--font-body);letter-spacing:var(--body-track);font-variant-numeric:lining-nums proportional-nums;font-feature-settings:"pnum","lnum","liga";-webkit-font-smoothing:antialiased;text-wrap:pretty}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--chrome)}
 
 @layer base{
 *,*::before,*::after{box-sizing:border-box}
 [hidden]{display:none!important}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:.98;margin:0;text-wrap:balance;text-transform:uppercase;text-box:trim-both cap alphabetic}
-h1{font-size:var(--fs-h1);letter-spacing:-.01em}
-h2{font-size:var(--fs-h2);letter-spacing:-.006em}
-h3{font-size:var(--fs-h3);letter-spacing:0;line-height:1.05}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.06;margin:0;text-wrap:balance;text-transform:uppercase;text-box:trim-both cap alphabetic}
+h1{font-size:var(--fs-h1);letter-spacing:.015em}
+h2{font-size:var(--fs-h2);letter-spacing:.02em}
+h3{font-family:var(--font-cond);font-size:var(--fs-h3);letter-spacing:.01em;line-height:1.05}
 p{margin:0}
 a{color:inherit;text-decoration-thickness:from-font;text-underline-offset:.14em}
 img,svg{max-width:100%;height:auto;display:block}
@@ -92,31 +96,36 @@ h1[tabindex="-1"]:focus-visible,h3[tabindex="-1"]:focus-visible,.confirm:focus-v
 .skips a:focus{position:static;left:auto}
 
 /* header */
-.site-head{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);box-shadow:inset 0 -1px 0 var(--line)}
+.site-head{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--chrome);color:var(--foot-ink);box-shadow:inset 0 -1px 0 var(--foot-line)}
+.site-head :focus-visible{outline-color:var(--focus-dark)}
+.logo{display:inline-flex;align-items:center;min-height:44px;flex:none}
+.logo img{height:56px;width:auto;display:block}
+@media (max-width:899px){.logo img{height:40px}}
+.foot-logo img{height:64px}
 @supports (animation-timeline: scroll()){
   .site-head{box-shadow:none;animation:scrolled-line linear both;animation-timeline:scroll(root);animation-range:0 96px}
-  @keyframes scrolled-line{from{box-shadow:inset 0 -1px 0 transparent}to{box-shadow:inset 0 -1px 0 var(--line-strong)}}
+  @keyframes scrolled-line{from{box-shadow:inset 0 -1px 0 var(--foot-line)}to{box-shadow:inset 0 -1px 0 var(--gold),0 1px 0 var(--line)}}
 }
 .site-head .wrap{display:flex;align-items:center;gap:16px;min-height:var(--head-h)}
 .wordmark{display:flex;flex-direction:column;text-decoration:none;line-height:1;min-height:44px;justify-content:center}
-.wordmark b{font:700 26px/1 var(--font-display);text-transform:uppercase;letter-spacing:.01em}
+.wordmark b{font:700 22px/1 var(--font-display);text-transform:uppercase;letter-spacing:.01em}
 .wordmark small{font:600 11px/1.2 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin-top:3px}
 .logo-slot{width:44px;height:44px;border:1px dashed var(--line-strong);border-radius:var(--radius);display:grid;place-items:center;font:600 9px/1.1 var(--font-mono);text-align:center;color:var(--ink-2);text-transform:uppercase;letter-spacing:.04em;flex:none}
 .nav{margin-inline-start:auto}
 .nav ul{list-style:none;margin:0;padding:0;display:flex;gap:2px;align-items:center}
-.nav a:not(.btn){display:inline-flex;align-items:center;min-height:44px;padding:0 12px;text-decoration:none;color:var(--ink);font-weight:500;box-shadow:inset 0 -2px 0 transparent;transition:color var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out)}
-.nav a:not(.btn):hover{color:var(--ink-2)}
-.nav a[aria-current="page"]{box-shadow:inset 0 -2px 0 var(--accent);font-weight:600}
+.nav a:not(.btn){display:inline-flex;align-items:center;min-height:44px;padding:0 12px;text-decoration:none;color:var(--foot-ink);font-weight:500;box-shadow:inset 0 -2px 0 transparent;transition:color var(--t-hover) var(--ease-out),box-shadow var(--t-hover) var(--ease-out)}
+.nav a:not(.btn):hover{color:var(--gold-light)}
+.nav a[aria-current="page"]{box-shadow:inset 0 -2px 0 var(--gold);font-weight:600}
 .nav .nav-cta{margin-inline-start:8px}
 .drawer{margin-inline-start:auto;display:none}
-.drawer summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 12px;border:1px solid var(--line-strong);border-radius:var(--radius);font-weight:600;transition:background-color var(--t-hover) var(--ease-out)}
+.drawer summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 12px;border:1px solid var(--foot-line);border-radius:var(--radius);font-weight:600;color:var(--foot-ink);transition:background-color var(--t-hover) var(--ease-out)}
 .drawer summary::-webkit-details-marker{display:none}
-.drawer summary:hover{background:var(--wash)}
-.drawer[open] summary{background:var(--wash)}
-.drawer ul{list-style:none;margin:0;padding:8px var(--gutter-r) 12px var(--gutter-l);position:absolute;inset-inline:0;top:100%;background:var(--bg);box-shadow:inset 0 1px 0 var(--line),0 1px 0 var(--line)}
-.drawer li a{display:flex;align-items:center;min-height:48px;text-decoration:none;font-weight:500;padding:0 4px;box-shadow:inset 0 -1px 0 var(--line);transition:color var(--t-hover) var(--ease-out)}
-.drawer li a:hover{color:var(--ink-2)}
-.drawer li a[aria-current="page"]{font-weight:700;color:var(--accent)}
+.drawer summary:hover{background:color-mix(in srgb, var(--foot-ink) 10%, transparent)}
+.drawer[open] summary{background:color-mix(in srgb, var(--foot-ink) 10%, transparent)}
+.drawer ul{list-style:none;margin:0;padding:8px var(--gutter-r) 12px var(--gutter-l);position:absolute;inset-inline:0;top:100%;background:var(--chrome);color:var(--foot-ink);box-shadow:inset 0 1px 0 var(--foot-line),0 1px 0 var(--line)}
+.drawer li a{display:flex;align-items:center;min-height:48px;text-decoration:none;font-weight:500;padding:0 4px;box-shadow:inset 0 -1px 0 var(--foot-line);transition:color var(--t-hover) var(--ease-out)}
+.drawer li a:hover{color:var(--gold-light)}
+.drawer li a[aria-current="page"]{font-weight:700;color:var(--gold-light)}
 @media (max-width:899px){.nav{display:none}.drawer{display:block;position:static}}
 
 /* buttons */
@@ -125,6 +134,9 @@ h1[tabindex="-1"]:focus-visible,h3[tabindex="-1"]:focus-visible,.confirm:focus-v
 .btn-primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 .btn-primary:hover{background:var(--accent-hover);border-color:var(--accent-hover)}
 .btn-primary:active{background:var(--accent-press);border-color:var(--accent-press)}
+.btn-gold{background:var(--gold-light);color:var(--chrome);border-color:var(--gold-light)}
+.btn-gold:hover{background:color-mix(in srgb, var(--gold-light), #ffffff 14%);border-color:color-mix(in srgb, var(--gold-light), #ffffff 14%)}
+.btn-gold:active{background:var(--gold);border-color:var(--gold)}
 .btn-secondary{border-color:var(--line-strong);color:var(--ink)}
 .btn-secondary:hover{background:var(--wash)}
 .btn-secondary:active{background:var(--wash-press)}
@@ -162,9 +174,13 @@ h1[tabindex="-1"]:focus-visible,h3[tabindex="-1"]:focus-visible,.confirm:focus-v
 .hero{padding-block:48px 56px}
 .hero-grid{display:grid;gap:32px;align-items:start}
 @media (min-width:900px){.hero-grid{grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px}.hero{padding-block:64px 72px}}
-.hero h1{max-width:12ch}
+.hero h1{max-width:14ch}
 .hero .lede{font-size:clamp(17px, 1rem + .35vw, 21px);line-height:1.45;max-width:var(--measure);color:var(--ink)}
 .cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.descriptors{font:600 13px/1.6 var(--font-body);letter-spacing:.08em;text-transform:uppercase;color:var(--gold-ink)}
+.descriptors span{color:var(--gold);padding-inline:2px}
+.card-figure{margin:12px 0 0;display:grid;gap:8px}
+.card-figure img{width:100%;height:auto;border-radius:var(--radius);box-shadow:inset 0 0 0 1px var(--line)}
 .flag{display:inline-block;font:600 11px/1.2 var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);border:1px dashed var(--line-strong);border-radius:var(--radius);padding:3px 6px;vertical-align:middle}
 
 /* photo slots: honest placeholders, ratio-locked */
@@ -174,16 +190,16 @@ h1[tabindex="-1"]:focus-visible,h3[tabindex="-1"]:focus-visible,.confirm:focus-v
 .slot .tag{position:absolute;top:10px;left:10px;z-index:2;font:600 10px/1.2 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);border:1px dashed var(--line-strong);background:color-mix(in srgb, var(--bg) 70%, transparent);padding:3px 6px;border-radius:3px}
 .slot .label{position:absolute;inset-inline:12px;bottom:12px;z-index:2;color:var(--foot-ink);font:600 14px/1.3 var(--font-body)}
 .slot .label small{display:block;font:500 12px/1.3 var(--font-body);letter-spacing:.04em;opacity:.8;text-transform:uppercase}
-.slot .mark{position:absolute;inset:0;display:grid;place-items:center;z-index:0;color:var(--ink-3);font:700 clamp(28px,6vw,56px)/1 var(--font-display);text-transform:uppercase;letter-spacing:.02em;opacity:.5}
+.slot .mark{position:absolute;inset:0;display:grid;place-items:center;z-index:0;color:var(--ink-3);font:700 clamp(28px,6vw,56px)/1 var(--font-cond);text-transform:uppercase;letter-spacing:.02em;opacity:.5}
 .slot.thermal{--slot-tint:color-mix(in srgb, var(--surface-2), var(--chrome) 22%);background:var(--slot-tint)}
 
 /* credentials wall */
 .creds{list-style:none;margin:0;padding:0;display:grid;gap:20px 24px}
 @media (min-width:700px){.creds{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media (max-width:699px){.creds{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.creds li{border-top:2px solid var(--chrome);padding-top:12px;display:grid;gap:4px;min-width:0}
+.creds li{border-top:2px solid var(--gold);padding-top:12px;display:grid;gap:4px;min-width:0}
 .creds .eyebrow{color:var(--ink-2)}
-.creds b{font:700 var(--fs-h3)/1.05 var(--font-display);text-transform:uppercase;overflow-wrap:anywhere}
+.creds b{font:700 var(--fs-h3)/1.05 var(--font-cond);text-transform:uppercase;overflow-wrap:anywhere}
 .creds p{font-size:var(--fs-small);color:var(--ink-2)}
 .creds li.note{border-top-style:dashed;border-top-width:1px;border-top-color:var(--line-strong)}
 .status{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:var(--fs-small)}
@@ -203,14 +219,14 @@ h1[tabindex="-1"]:focus-visible,h3[tabindex="-1"]:focus-visible,.confirm:focus-v
 .steps li::before{content:counter(step,decimal-leading-zero);font:700 15px/1 var(--font-mono);color:var(--ink-2);letter-spacing:.06em}
 .steps li::after{content:"";height:2px;background:var(--chrome);order:-1}
 @media (max-width:899px){.steps{border-left:2px solid var(--chrome);padding-left:20px}.steps li::after{display:none}}
-.steps b{font:700 var(--fs-h3)/1.05 var(--font-display);text-transform:uppercase}
+.steps b{font:700 var(--fs-h3)/1.05 var(--font-cond);text-transform:uppercase}
 .steps p{font-size:var(--fs-small);color:var(--ink-2)}
 
 /* trust triad */
 .triad{display:grid;gap:24px}
 @media (min-width:700px){.triad{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.triad div{display:grid;gap:6px;border-top:1px solid var(--line-strong);padding-top:14px}
-.triad b{font:700 var(--fs-h3)/1.05 var(--font-display);text-transform:uppercase}
+.triad div{display:grid;gap:6px;border-top:2px solid var(--gold);padding-top:14px}
+.triad b{font:700 var(--fs-h3)/1.05 var(--font-cond);text-transform:uppercase}
 .triad p{color:var(--ink-2);font-size:var(--fs-small)}
 
 /* testimonials (slots) */
@@ -230,7 +246,7 @@ details.faq{border-top:1px solid var(--line)}
 details.faq:last-of-type{border-bottom:1px solid var(--line)}
 details.faq summary{cursor:pointer;min-height:48px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-weight:600;list-style:none;padding:8px 0}
 details.faq summary::-webkit-details-marker{display:none}
-details.faq summary::after{content:"+";font:700 22px/1 var(--font-display);color:var(--ink-2)}
+details.faq summary::after{content:"+";font:700 22px/1 var(--font-cond);color:var(--ink-2)}
 details.faq[open] summary::after{content:"\2212"}
 details.faq p{padding-bottom:16px;color:var(--ink-2);font-size:var(--fs-small)}
 details.faq::details-content{height:0;overflow:clip}
@@ -273,7 +289,7 @@ fieldset{border:0;padding:0;margin:0;min-width:0}
 .summary ul{margin:0;padding-left:18px}
 .summary a{color:var(--err);font-weight:600}
 .confirm{border:2px solid var(--ok);border-radius:var(--radius);padding:20px;display:grid;gap:10px;background:var(--surface)}
-.confirm b{font:700 var(--fs-h3)/1.05 var(--font-display);text-transform:uppercase}
+.confirm b{font:700 var(--fs-h3)/1.05 var(--font-cond);text-transform:uppercase}
 .form .note{font-size:var(--fs-caption);color:var(--ink-2)}
 
 /* contact page layout */
@@ -289,14 +305,14 @@ fieldset{border:0;padding:0;margin:0;min-width:0}
 .socials a:hover{background:var(--wash)}
 
 /* footer */
-.site-foot{background:var(--foot-bg);color:var(--foot-ink);padding-block:48px 40px}
+.site-foot{background:var(--foot-bg);color:var(--foot-ink);padding-block:48px 40px;box-shadow:inset 0 1px 0 var(--gold)}
 .site-foot .wrap{display:grid;gap:32px}
 @media (min-width:700px){.site-foot .cols{display:grid;grid-template-columns:2fr 1fr 1fr;gap:32px}}
-.site-foot h4{font-size:13px;letter-spacing:.1em;color:color-mix(in srgb, var(--foot-ink) 65%, transparent);margin-bottom:10px;font-family:var(--font-body);font-weight:600;text-box:normal}
+.site-foot h4{font-size:13px;letter-spacing:.1em;color:var(--gold-light);margin-bottom:10px;font-family:var(--font-body);font-weight:600;text-box:normal}
 .site-foot ul{list-style:none;margin:0;padding:0;display:grid;gap:2px}
 .site-foot li a{display:flex;align-items:center;min-height:44px;min-width:44px;text-decoration:none;transition:color var(--t-hover) var(--ease-out)}
 .site-foot li a:hover{color:color-mix(in srgb, var(--foot-ink) 70%, transparent)}
-.site-foot .cred-strip{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:var(--fs-small);font-weight:500;border-top:1px solid var(--foot-line);padding-top:16px}
+.site-foot .cred-strip{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:var(--fs-small);font-weight:500;color:var(--gold-light);border-top:1px solid var(--gold);padding-top:16px}
 .site-foot .legal{font-size:var(--fs-caption);color:color-mix(in srgb, var(--foot-ink) 65%, transparent);display:flex;flex-wrap:wrap;gap:6px 18px}
 
 /* sticky mobile CTA bar */
@@ -361,7 +377,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opa
 @media (max-width:699px){body::after{background-image:url("/topo-tile.svg");background-size:900px 900px;--topo-alpha:.8}}
 @media print{body::after{display:none}}
 .band.alt{background:color-mix(in srgb, var(--surface) 86%, transparent)}
-.site-head{background:color-mix(in srgb, var(--bg) 96%, transparent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+
 .tile,.ghost,.field input,.field textarea,.confirm,.summary{background:color-mix(in srgb, var(--bg) 92%, transparent)}
 .tile{background:color-mix(in srgb, var(--bg) 94%, transparent)}
 
@@ -437,6 +453,7 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opa
 
 /* footer marginalia */
 .site-foot .margin{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;font:500 11px/1.5 var(--font-mono);letter-spacing:.05em;text-transform:uppercase;color:color-mix(in srgb, var(--foot-ink) 65%, transparent);border-top:1px solid var(--foot-line);padding-top:14px}
+.site-foot :focus-visible,.band.invert :focus-visible,.cta-bar :focus-visible{outline-color:var(--focus-dark)}
 .site-foot .scalebar{color:color-mix(in srgb, var(--foot-ink) 75%, transparent)}
 .site-foot .scalebar .bar{box-shadow:inset 0 0 0 1px var(--foot-ink)}
 .site-foot .scalebar .bar i{background:var(--foot-ink)}
@@ -494,7 +511,7 @@ dialog.spec .bar{display:flex;justify-content:space-between;align-items:center;g
 <svg hidden aria-hidden="true" focusable="false"><symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol><symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></symbol><symbol id="i-north" viewBox="0 0 24 24"><path d="M12 3v18M8 21h8"/><path class="fill" d="M12 3l4.5 9h-9z"/></symbol></svg>
 <div class="varbar" id="varbar" data-per="D4980 D3245 D4657 D0264 D2126" role="region" aria-label="Mockup controls">
   <div class="wrap">
-    <span><strong>D700 mockup · SP-01b PADDOCK v2</strong><span class="long"> · PAL Noma Forest Season · topographic sheet layer · seed fitzferalhunters-paddock</span></span>
+    <span><strong>D700 mockup · SP-01c PADDOCK v3</strong><span class="long"> · card colourway (green · gold · cream) on the topographic sheet · seed fitzferalhunters-paddock</span></span>
     <span class="grow"></span>
     <button type="button" id="t-motion" aria-pressed="false" title="Emulates the reduced-motion twin (D4980); the real gate is the media query (D3453)"><span class="long">Motion: on</span><span class="short">Motion</span></button>
     <button type="button" id="t-topo" aria-pressed="true" title="Toggle the contour field and grid (D2410) to compare against v1"><span class="long">Sheet: on</span><span class="short">Sheet</span></button>
@@ -507,11 +524,10 @@ dialog.spec .bar{display:flex;justify-content:space-between;align-items:center;g
 <div class="skips" data-per="D0228 D2113 D0583 D2114"><a href="#main">Skip to content</a><a href="/contact#enquiry">Skip to contact</a></div>
 <header class="site-head" data-per="D0201 D2108 D2050 D4262">
   <div class="wrap">
-    <div class="logo-slot" aria-hidden="true">Logo slot</div>
-    <a class="wordmark" href="/" data-per="D0106 D0141"><b>Fitz Feral Hunters</b><small>Pest &amp; vermin control · Gippsland</small></a>
+    <a class="logo" href="/" data-per="D0106 D0141" data-per="D0443 D0401 D0448 D0404 D0408"><img src="/brand/logo-lockup.png" alt="Fitz Feral Hunters — Protecting Victoria&#x27;s Farms" width="640" height="181" decoding="async" fetchpriority="high"></a>
     <span class="datum" title="Grid: MGA zone 55, GDA2020"><svg class="north" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-north"/></svg><span>N · MGA 55</span></span>
-    <nav class="nav" aria-label="Primary" data-per="D3404 D0282 D2124 D2139 D0300 D0551 D0745 D5641 D2121 D0220 D0494 D1493 D2244"><ul><li><a href="/">Home</a></li><li><a href="/services">Services</a></li><li><a href="/about" aria-current=page>About</a></li><li><a href="/gallery">Gallery</a></li><li><a href="/contact">Contact</a></li><li class="nav-cta"><a class="btn btn-primary" href="/contact#enquiry" data-focus="enquiry" style="min-height:44px;padding-inline:16px">Request a quote</a></li></ul></nav>
-    <details class="drawer" id="drawer" data-per="D0207 D2122 D0377"><summary aria-label="Menu">Menu</summary><ul><li><a href="/">Home</a></li><li><a href="/services">Services</a></li><li><a href="/about" aria-current=page>About</a></li><li><a href="/gallery">Gallery</a></li><li><a href="/contact">Contact</a></li><li><a href="/contact#enquiry" data-focus="enquiry" style="color:var(--accent);font-weight:700">Request a quote</a></li></ul></details>
+    <nav class="nav" aria-label="Primary" data-per="D3404 D0282 D2124 D2139 D0300 D0551 D0745 D5641 D2121 D0220 D0494 D1493 D2244"><ul><li><a href="/">Home</a></li><li><a href="/services">Services</a></li><li><a href="/about" aria-current=page>About</a></li><li><a href="/gallery">Gallery</a></li><li><a href="/contact">Contact</a></li><li class="nav-cta"><a class="btn btn-gold" href="/contact#enquiry" data-focus="enquiry" style="min-height:44px;padding-inline:16px">Request a quote</a></li></ul></nav>
+    <details class="drawer" id="drawer" data-per="D0207 D2122 D0377"><summary aria-label="Menu">Menu</summary><ul><li><a href="/">Home</a></li><li><a href="/services">Services</a></li><li><a href="/about" aria-current=page>About</a></li><li><a href="/gallery">Gallery</a></li><li><a href="/contact">Contact</a></li><li><a href="/contact#enquiry" data-focus="enquiry" style="color:var(--gold-light);font-weight:700">Request a quote</a></li></ul></details>
   </div>
 </header>
 <main id="main" data-per="D1749 D6548 D2519 D4311 D3135 D2114 D0228 D2113 D2041 D1214 D2044 D1278 D2647 D1268 D0054 D2037 D0081 D1251 D0080 D0083 D2045 D2046 D2744 D2450 D1737 D0447 D4987 D1784 D2121 D5641 D0745 D4657 D1201 D1248 D1296 D1336 D2213 D0580 D0594 D0597" data-per="D0158 D3009 D0153 D3432 D1011 D3006 D4198 D0400 D0162 D0161 D0166 D0033 D2018 D0168 D2019 D0192 D0191 D0197 D0157 D1243 D1038 D2510 D1150 D3373 D1227 D2504" data-per="D0106 D0108 D2668 D0101 D1323 D3193 D3458 D0144 D0076 D0149 D0063 D0142 D3017 D0141 D0140 D2069 D1333 D2052 D1350" data-per="D3051 D3468 D3052 D3171 D0651 D0652 D2335 D0673 D2248 D2327 D0693 D0643 D2343 D0488 D2249 D3453 D0594 D2301 D2342 D0694 D4656 D4980 D0453 D3425 D2227 D0451 D0665 D0666 D2347 D2035 D1222 D1225 D0668" data-per="D3007 D0644 D2147 D0581 D0582" data-per="D3002 D3003 D3040 D0353 D5252" data-per="D2410 D0041 D1851 D1856 D3077 D3359 D0436 D4987 D0191">
@@ -529,6 +545,7 @@ dialog.spec .bar{display:flex;justify-content:space-between;align-items:center;g
         <h3>Credentials</h3>
         <ul class="ledger num" data-per="D0142 D0041"><li><b>Firearms licence</b><span class="lead" aria-hidden="true"></span><span>Victorian firearms licence, current</span></li><li><b>Game Licence</b><span class="lead" aria-hidden="true"></span><span>Victorian Game Licence (deer)</span></li><li><b>SSAA member</b><span class="lead" aria-hidden="true"></span><span>Sporting Shooters&#x27; Association of Australia</span></li><li><b>Farmer Assist</b><span class="lead" aria-hidden="true"></span><span>SSAA Farmer Assist accredited</span></li><li><b>First Aid</b><span class="lead" aria-hidden="true"></span><span>Current first-aid certificate</span></li><li><b>AHCPMG304</b><span class="lead" aria-hidden="true"></span><span>Humane dispatch, nationally recognised unit</span></li><li><b>$20m public liability</b><span class="lead" aria-hidden="true"></span><span>Insured for every job</span></li></ul>
         <p class="caption">Credentials current as at <span class="flag">month year</span>. Certificates of currency supplied on request before work starts.</p>
+        <figure class="card-figure" data-per="D0159 D0049 D5303 D3399 D3876 D0107 D0106 D1350 D3373"><img src="/brand/fitz-card.jpg" alt="The Fitz Feral Hunters card: rifle mark, Protecting Victoria's Farms, contract pest control, deer and feral management, thermal hunting, farm security, fully insured, 0499 866 580" width="1280" height="755" loading="lazy" decoding="async"><figcaption class="caption">The card, as supplied. The site's green, gold and cream are sampled from it.</figcaption></figure>
         <div class="grid grid-2" style="margin-top:8px"><div class="slot" data-per="D0408 D2193 D0401 D0402 D0404 D2202 D0448 D0443 D0433 D2212 D2078 D0039 D0371" data-per="D0041 D0433 D3813" role="img" aria-label="Photo slot: Fitz with the thermal kit, Warragul"><span class="mark" aria-hidden="true">Gear</span><span class="tag">Photo slot · client supplies</span><span class="plate">Location withheld</span><i class="corner tl" aria-hidden="true"></i><i class="corner tr" aria-hidden="true"></i><i class="corner bl" aria-hidden="true"></i><i class="corner br" aria-hidden="true"></i><span class="label">Fitz with the thermal kit, Warragul<small>gear · jpg/avif · alt text written per photo</small></span></div><div class="slot" data-per="D0408 D2193 D0401 D0402 D0404 D2202 D0448 D0443 D0433 D2212 D2078 D0039 D0371" data-per="D0041 D0433 D3813" role="img" aria-label="Photo slot: Gippsland paddock at first light"><span class="mark" aria-hidden="true">Property</span><span class="tag">Photo slot · client supplies</span><span class="plate">Location withheld</span><i class="corner tl" aria-hidden="true"></i><i class="corner tr" aria-hidden="true"></i><i class="corner bl" aria-hidden="true"></i><i class="corner br" aria-hidden="true"></i><span class="label">Gippsland paddock at first light<small>property · jpg/avif · alt text written per photo</small></span></div></div>
       </div>
       <aside class="margin-notes" aria-label="Notes" data-per="D0098 D0433 D0140"><h4>Notes</h4><p><sup>1</sup><span><b style="font-weight:600;color:var(--ink)">Warragul.</b> Base of operations, grid reference 063 758 on the MGA zone 55 grid.</span></p><p><sup>2</sup><span><b style="font-weight:600;color:var(--ink)">AHCPMG304.</b> A nationally recognised unit for humane dispatch; the standard every job is held to.</span></p><p><sup>3</sup><span><b style="font-weight:600;color:var(--ink)">Codes.</b> Victorian codes of practice for the humane control of each species govern the method.</span></p><p><sup>4</sup><span><b style="font-weight:600;color:var(--ink)">Insurance.</b> $20 million public liability, with a certificate of currency available before work starts.</span></p></aside>
@@ -541,7 +558,7 @@ dialog.spec .bar{display:flex;justify-content:space-between;align-items:center;g
   <div class="wrap">
     <div class="cols">
       <div class="stack" style="--gap:12px">
-        <a class="wordmark" href="/" style="color:inherit"><b>Fitz Feral Hunters</b><small style="color:color-mix(in srgb, var(--foot-ink) 65%, transparent)">Pest &amp; vermin control · Gippsland</small></a>
+        <a class="logo foot-logo" href="/" data-per="D0443 D0401 D0448 D0404 D0408"><img src="/brand/logo-lockup.png" alt="Fitz Feral Hunters — Protecting Victoria&#x27;s Farms" width="640" height="181" loading="lazy" decoding="async"></a>
         <p class="small" style="max-width:36ch">Licensed, insured feral animal control for farmers and landholders across Gippsland and regional Victoria.</p>
         <p class="small num">0499 866 580 · fitzferalhunters1@gmail.com</p>
       </div>
@@ -558,20 +575,44 @@ dialog.spec .bar{display:flex;justify-content:space-between;align-items:center;g
   <a class="btn btn-primary" href="/contact#enquiry" data-focus="enquiry">Request a quote</a>
 </div>
 <dialog class="spec" id="spec" data-per="D3245 D4657 D2126" aria-labelledby="spec-title">
-  <div class="bar"><h2 id="spec-title">SP-01b · PADDOCK v2 · spec sheet</h2><button type="button" class="btn btn-secondary" id="spec-close" aria-label="Close spec sheet">&times;</button></div>
+  <div class="bar"><h2 id="spec-title">SP-01c · PADDOCK v3 · spec sheet</h2><button type="button" class="btn btn-secondary" id="spec-close" aria-label="Close spec sheet">&times;</button></div>
   <div class="inner">
-    <p class="counts"><span>261 entries</span><span>30 laws</span><span>21 pairs</span><span>10 anti-pairs resolved</span><span>7 palette records</span><span>25 doctrine records</span><span>5 templates/dynamics/kits</span><span>359 citations total</span></p>
+    <p class="counts"><span>267 entries</span><span>30 laws</span><span>23 pairs</span><span>10 anti-pairs resolved</span><span>7 palette records</span><span>25 doctrine records</span><span>5 templates/dynamics/kits</span><span>367 citations total</span></p>
     <p>Compiled against <span class="mono">D700 · 4 Oct 2026 · 6511 entries D0001-D6558 · 218 laws · 387 capsules · 466 groups · 1824 pairs · 499 anti-pairs · 457 palettes · 21 lenses</span>. Every component on the page carries a <span class="mono">data-per</span> attribute naming the records it honours; switch on X-ray and hover any outlined component to read them. The v2 delta adds the topographic sheet layer: a seeded contour field (seed <span class="mono">fitzferalhunters-paddock</span>, same hills on every build), an MGA-style 1 km grid, real zone-55 grid references for the base and every locality, scale bars, a map key, marginalia and photo registration frames. Nothing on the layer animates and no new hue was added.</p>
     <h3>Templates, dynamics, motion kit</h3><p class="mono">MK-01 · DY01 · DY10 · DY07 · TP04</p>
     <h3>Palettes and colour rules</h3><p class="mono">PALRULE-02 · PALRULE-03 · PALRULE-05 · PAL Noma Forest Season · PAL Forest Institutional · PALRULE-01 · PALRULE-04</p>
     <h3>Doctrine lenses</h3><p class="mono">LENS-05 · LENS-06 · LENS-16 · LENS-19 · LENS-20 · LENS-09 · LENS-03 · LENS-02 · LENS-04 · LENS-07 · LENS-14 · LENS-15 · LENS-13 · LENS-12 · TENSION-01 · TENSION-05 · TENSION-06 · LENS-21 · DOC-01 · DOC-02 · DOC-03 · DOC-04 · DOC-05 · TENSION-02 · TENSION-03</p>
     <h3>Laws honoured</h3><p class="mono">LAW-02 · LAW-03 · LAW-05 · LAW-06 · LAW-07 · LAW-10 · LAW-12 · LAW-14 · LAW-15 · LAW-16 · LAW-17 · LAW-18 · LAW-20 · LAW-23 · LAW-25 · LAW-26 · LAW-27 · LAW-28 · LAW-29 · LAW-31 · LAW-32 · LAW-33 · LAW-34 · LAW-37 · LAW-40 · LAW-41 · LAW-44 · LAW-46 · LAW-83 · LAW-113</p>
-    <h3>Pairs honoured</h3><p class="mono">PAIR-06 · PAIR-25 · PAIR-26 · PAIR-88 · PAIR-125 · PAIR-168 · PAIR-173 · PAIR-191 · PAIR-199 · PAIR-266 · PAIR-356 · PAIR-357 · PAIR-388 · PAIR-422 · PAIR-509 · PAIR-794 · PAIR-796 · PAIR-958 · PAIR-1075 · PAIR-1132 · PAIR-1142</p>
+    <h3>Pairs honoured</h3><p class="mono">PAIR-06 · PAIR-25 · PAIR-26 · PAIR-88 · PAIR-125 · PAIR-168 · PAIR-173 · PAIR-184 · PAIR-191 · PAIR-199 · PAIR-266 · PAIR-356 · PAIR-357 · PAIR-388 · PAIR-422 · PAIR-509 · PAIR-794 · PAIR-796 · PAIR-958 · PAIR-982 · PAIR-1075 · PAIR-1132 · PAIR-1142</p>
     <h3>Anti-pairs swept and resolved</h3><p class="mono">NOPAIR-01 · NOPAIR-02 · NOPAIR-04 · NOPAIR-59 · NOPAIR-85 · NOPAIR-129 · NOPAIR-176 · NOPAIR-185 · NOPAIR-237 · NOPAIR-450</p>
-    <h3>Entries (261)</h3><ul class="ids"><li>D0033 · Nature distilled / earthy</li><li>D0039 · Grain &amp; noise texture</li><li>D0041 · Blueprint / schematic</li><li>D0054 · 8-point spacing system</li><li>D0061 · Z-pattern flow</li><li>D0063 · Single-column long-form</li><li>D0067 · Card grid</li><li>D0076 · Centered narrow measure</li><li>D0080 · Container-query modules</li><li>D0081 · Fluid intrinsic sizing</li><li>D0083 · Auto-fit responsive cards</li><li>D0087 · Mega-footer grid</li><li>D0093 · Vertical timeline</li><li>D0098 · Marginalia annotations</li><li>D0101 · Fluid type scale</li><li>D0106 · Display + body pairing</li><li>D0108 · Neutral grotesque system</li><li>D0140 · Small caps + tracking labels</li><li>D0141 · All-caps eyebrow kickers</li><li>D0142 · Tabular numerals</li><li>D0144 · text-wrap balance &amp; pretty</li><li>D0149 · Dynamic line-length guard</li><li>D0153 · Relative color derivation</li><li>D0157 · High-contrast mode support</li><li>D0158 · Semantic color tokens</li><li>D0161 · 60-30-10 distribution</li><li>D0162 · Monochrome + single accent</li><li>D0166 · Earthy distilled palette</li><li>D0168 · Muted desaturated calm</li><li>D0191 · Color-blind safe ramps</li><li>D0192 · APCA contrast pairing</li><li>D0197 · Status color system</li><li>D0201 · Sticky header</li><li>D0207 · Hamburger drawer</li><li>D0220 · Smooth anchor scrolling</li><li>D0226 · Footer sitemap</li><li>D0228 · Skip-to-content link</li><li>D0248 · Persistent dock / player</li><li>D0251 · Solid primary button</li><li>D0252 · Outline secondary</li><li>D0253 · Ghost / tertiary</li><li>D0260 · Icon button</li><li>D0264 · Toggle button</li><li>D0265 · Loading spinner-in-place</li><li>D0280 · Sticky mobile CTA bar</li><li>D0282 · Inline text link system</li><li>D0297 · Section-end CTA rhythm</li><li>D0300 · Min 44px hit area</li><li>D0301 · Top-aligned labels</li><li>D0307 · Validate-on-blur</li><li>D0310 · Submit error summary</li><li>D0311 · Field-level help affordance</li><li>D0323 · Autofill-cooperative markup</li><li>D0344 · Crash-proof draft restore</li><li>D0346 · Optional-field marking</li><li>D0347 · Grouped fieldsets</li><li>D0351 · Standard content card</li><li>D0353 · Outlined flat card</li><li>D0367 · Testimonial card</li><li>D0371 · Image-overlay caption card</li><li>D0374 · Empty-slot ghost card</li><li>D0375 · Accordion</li><li>D0377 · Native details/summary</li><li>D0381 · Native dialog element</li><li>D0387 · Inline banner alert</li><li>D0400 · Surface token hierarchy</li><li>D0401 · Responsive srcset images</li><li>D0402 · AVIF/WebP delivery</li><li>D0404 · Native lazy loading</li><li>D0408 · Aspect-ratio reservation</li><li>D0416 · Lightbox viewer</li><li>D0433 · Figure caption system</li><li>D0436 · SVG illustration system</li><li>D0443 · Descriptive alt strategy</li><li>D0446 · Keyboard-traversable gallery</li><li>D0447 · Image CDN transforms</li><li>D0448 · Priority hint preloading</li><li>D0451 · Fade-rise entrance</li><li>D0453 · CSS view() reveals</li><li>D0488 · Reduced-motion narrative path</li><li>D0494 · Anchored scroll margins</li><li>D0551 · 44px minimum targets</li><li>D0552 · Thumb-zone layout</li><li>D0553 · Bottom-anchored actions</li><li>D0580 · Complete tab order</li><li>D0581 · Visible focus rings</li><li>D0582 · :focus-visible styling</li><li>D0583 · Skip links</li><li>D0585 · Arrow-key grid navigation</li><li>D0589 · Escape-closes-everything</li><li>D0590 · Guarded enter-submit</li><li>D0591 · Space/enter button parity</li><li>D0592 · Modal focus trap</li><li>D0593 · Focus return on close</li><li>D0594 · Reduced-motion compliance</li><li>D0595 · Voice-control compatibility</li><li>D0597 · Live-region announcements</li><li>D0598 · inputmode keyboards</li><li>D0601 · Button state quartet</li><li>D0603 · Loading-state button</li><li>D0615 · Copy-confirm morph</li><li>D0642 · Live region announcements</li><li>D0643 · Reduced-motion fallback set</li><li>D0644 · Focus-visible ring system</li><li>D0651 · Duration token scale</li><li>D0652 · Easing token library</li><li>D0665 · @starting-style entry</li><li>D0666 · transition-behavior allow-discrete</li><li>D0668 · Height auto transitions</li><li>D0673 · GPU-only property discipline</li><li>D0693 · Reduced-motion variant set</li><li>D0694 · Vestibular-safe constraints</li><li>D0745 · Route announcement region</li><li>D0859 · Last-updated timestamps</li><li>D0860 · First-use empty state</li><li>D0867 · Actionable error messages</li><li>D0876 · Draft restoration prompt</li><li>D0878 · Double-submit guard</li><li>D0895 · Form error summary</li><li>D1011 · color-mix() blending</li><li>D1038 · Forced-colors adaptation</li><li>D1150 · Trust-signal palette</li><li>D1201 · Cascade layers (@layer)</li><li>D1214 · Logical properties</li><li>D1222 · interpolate-size auto</li><li>D1225 · ::details-content</li><li>D1226 · field-sizing: content</li><li>D1227 · accent-color</li><li>D1243 · forced-colors adaptation</li><li>D1248 · Utility + layer architecture</li><li>D1251 · clamp() fluid sizing</li><li>D1268 · Logical inset positioning</li><li>D1278 · Safe-area insets</li><li>D1296 · Print stylesheet layout</li><li>D1300 · field-sizing: content</li><li>D1323 · Fluid type with clamp</li><li>D1333 · text-box-trim</li><li>D1336 · font-display strategy</li><li>D1350 · Type licensing audit</li><li>D1493 · scroll-margin / padding</li><li>D1649 · Progressive enhancement forms</li><li>D1674 · Debounced autosave</li><li>D1737 · Preview deployments</li><li>D1749 · Structured data markup</li><li>D1784 · Performance budgets in CI</li><li>D1851 · Seeded PRNG</li><li>D1856 · Perlin and simplex noise</li><li>D2018 · Calm technology aesthetic</li><li>D2019 · OS-native utilitarian</li><li>D2035 · calc-size and interpolate-size</li><li>D2037 · Stack layout primitive</li><li>D2041 · Logical-property layout</li><li>D2044 · Safe-area inset layout</li><li>D2045 · content-visibility virtualization</li><li>D2046 · contain-intrinsic-size reservation</li><li>D2050 · Scroll-state layout adaptation</li><li>D2052 · text-box-edge tuning</li><li>D2069 · from-font underline metrics</li><li>D2078 · feTurbulence grain</li><li>D2108 · Sticky nav scroll-state</li><li>D2113 · Multiple skip links</li><li>D2114 · Landmark region jumps</li><li>D2121 · Deep-link state restoration</li><li>D2122 · Progressive disclosure nav</li><li>D2124 · Wayfinding scent labels</li><li>D2126 · command and commandfor</li><li>D2137 · Pointer-coarse sizing</li><li>D2138 · Pseudo-element hit expansion</li><li>D2139 · Accessible-name discipline</li><li>D2147 · Focus-visible-only ring</li><li>D2152 · user-invalid styling</li><li>D2156 · Constraint Validation messages</li><li>D2160 · inputmode and enterkeyhint</li><li>D2165 · Autocomplete token discipline</li><li>D2171 · No-JS progressive form</li><li>D2175 · Scroll-into-view on focus</li><li>D2184 · dialog closedby control</li><li>D2185 · Backdrop pseudo styling</li><li>D2186 · Paint and layout containment</li><li>D2187 · content-visibility cards</li><li>D2188 · Link-overlay block card</li><li>D2193 · Aspect-locked media card</li><li>D2202 · decoding=async hints</li><li>D2212 · Focal-point cropping</li><li>D2213 · SVG symbol sprite system</li><li>D2227 · animation-range phases</li><li>D2233 · overscroll-behavior containment</li><li>D2244 · scroll-margin chapter targets</li><li>D2248 · Compositor-only scroll effects</li><li>D2249 · Static reduced-motion narrative</li><li>D2276 · inert background isolation</li><li>D2282 · Voice-control name matching</li><li>D2298 · Pointer-coarse target scaling</li><li>D2301 · Perceived-instant budget</li><li>D2306 · status versus alert roles</li><li>D2312 · Success persistence tuning</li><li>D2313 · Error recovery guidance</li><li>D2314 · Debounce and throttle grammar</li><li>D2318 · Micro-copy as feedback</li><li>D2324 · Focus-return guarantee</li><li>D2327 · Individual transform properties</li><li>D2335 · Asymmetric enter and exit</li><li>D2342 · Vestibular trigger audit</li><li>D2343 · Reduced-motion granularity</li><li>D2347 · Discrete property transitions</li><li>D2410 · Contour isoline plot</li><li>D2450 · Degradation ladder design</li><li>D2504 · accent-color theming</li><li>D2510 · prefers-contrast adaptation</li><li>D2519 · theme-color meta tag</li><li>D2647 · Safe-area landscape insets</li><li>D2668 · Modern system font stack</li><li>D2744 · Progressive enhancement ladder</li><li>D3002 · Warm ivory ground, never white</li><li>D3003 · Near-black ink, never black</li><li>D3006 · Alpha-tint border tokens</li><li>D3007 · Focus colour outside the palette</li><li>D3009 · Three-layer colour indirection</li><li>D3017 · Proportional lining numerals globally</li><li>D3040 · Inset box-shadow hairlines</li><li>D3051 · Four named easing tokens</li><li>D3052 · Colour-only hover transitions</li><li>D3077 · Shader-hash deterministic seeding</li><li>D3128 · Partner logo wall</li><li>D3135 · Complete sitemap as inventory</li><li>D3171 · No-transform hover discipline</li><li>D3187 · Static partner wall</li><li>D3193 · Fluid headings, fixed body</li><li>D3245 · Iteration-timeline case study</li><li>D3359 · Config-hash regeneration</li><li>D3373 · Mode-invariant brand accent</li><li>D3404 · Dimming ink links</li><li>D3425 · Commerce view() reveals</li><li>D3428 · Flat tiles, dressed controls</li><li>D3432 · Relative-color state layers</li><li>D3453 · Reduced-motion as a hard gate</li><li>D3458 · Optical tracking table</li><li>D3465 · Invisible-link plus real-button pair</li><li>D3468 · Non-round house durations</li><li>D3746 · Forgiving-format input</li><li>D3780 · Status dot with text twin</li><li>D3790 · Step-by-step journey navigation</li><li>D3792 · Transaction confirmation page</li><li>D3796 · Third-party review badge strip</li><li>D3813 · Plain-language policy summary</li><li>D3821 · Disclosure at body contrast</li><li>D4187 · Audit-badge footer</li><li>D4198 · Alpha line tokens</li><li>D4225 · Trust-claim copy triad</li><li>D4262 · Scrolled hairline by self-timeline</li><li>D4311 · Brand-chrome theme-color</li><li>D4653 · Overline-numbered takeaway grid</li><li>D4656 · Monoculture transition pair</li><li>D4657 · Version-stamped token root</li><li>D4980 · In-page Reduce-Motion Toggle</li><li>D4987 · Carbon-Aware Interface Budget</li><li>D5252 · Seasonal eight-step ground sheets</li><li>D5639 · State-attribute dialog lightbox</li><li>D5641 · Section-tracking document title</li><li>D6468 · Parameter readout captions</li><li>D6548 · OG Image At 1200 × 630</li></ul>
-    <h3>Surface plan record</h3><pre>(SP record not found in docs/)</pre>
+    <h3>Entries (267)</h3><ul class="ids"><li>D0033 · Nature distilled / earthy</li><li>D0039 · Grain &amp; noise texture</li><li>D0041 · Blueprint / schematic</li><li>D0049 · </li><li>D0054 · 8-point spacing system</li><li>D0061 · Z-pattern flow</li><li>D0063 · Single-column long-form</li><li>D0067 · Card grid</li><li>D0076 · Centered narrow measure</li><li>D0080 · Container-query modules</li><li>D0081 · Fluid intrinsic sizing</li><li>D0083 · Auto-fit responsive cards</li><li>D0087 · Mega-footer grid</li><li>D0093 · Vertical timeline</li><li>D0098 · Marginalia annotations</li><li>D0101 · Fluid type scale</li><li>D0106 · Display + body pairing</li><li>D0107 · </li><li>D0108 · Neutral grotesque system</li><li>D0140 · Small caps + tracking labels</li><li>D0141 · All-caps eyebrow kickers</li><li>D0142 · Tabular numerals</li><li>D0144 · text-wrap balance &amp; pretty</li><li>D0149 · Dynamic line-length guard</li><li>D0153 · Relative color derivation</li><li>D0157 · High-contrast mode support</li><li>D0158 · Semantic color tokens</li><li>D0159 · </li><li>D0161 · 60-30-10 distribution</li><li>D0162 · Monochrome + single accent</li><li>D0166 · Earthy distilled palette</li><li>D0168 · Muted desaturated calm</li><li>D0191 · Color-blind safe ramps</li><li>D0192 · APCA contrast pairing</li><li>D0197 · Status color system</li><li>D0201 · Sticky header</li><li>D0207 · Hamburger drawer</li><li>D0220 · Smooth anchor scrolling</li><li>D0226 · Footer sitemap</li><li>D0228 · Skip-to-content link</li><li>D0248 · Persistent dock / player</li><li>D0251 · Solid primary button</li><li>D0252 · Outline secondary</li><li>D0253 · Ghost / tertiary</li><li>D0260 · Icon button</li><li>D0264 · Toggle button</li><li>D0265 · Loading spinner-in-place</li><li>D0280 · Sticky mobile CTA bar</li><li>D0282 · Inline text link system</li><li>D0297 · Section-end CTA rhythm</li><li>D0300 · Min 44px hit area</li><li>D0301 · Top-aligned labels</li><li>D0307 · Validate-on-blur</li><li>D0310 · Submit error summary</li><li>D0311 · Field-level help affordance</li><li>D0323 · Autofill-cooperative markup</li><li>D0344 · Crash-proof draft restore</li><li>D0346 · Optional-field marking</li><li>D0347 · Grouped fieldsets</li><li>D0351 · Standard content card</li><li>D0353 · Outlined flat card</li><li>D0367 · Testimonial card</li><li>D0371 · Image-overlay caption card</li><li>D0374 · Empty-slot ghost card</li><li>D0375 · Accordion</li><li>D0377 · Native details/summary</li><li>D0381 · Native dialog element</li><li>D0387 · Inline banner alert</li><li>D0400 · Surface token hierarchy</li><li>D0401 · Responsive srcset images</li><li>D0402 · AVIF/WebP delivery</li><li>D0404 · Native lazy loading</li><li>D0408 · Aspect-ratio reservation</li><li>D0416 · Lightbox viewer</li><li>D0433 · Figure caption system</li><li>D0436 · SVG illustration system</li><li>D0443 · Descriptive alt strategy</li><li>D0446 · Keyboard-traversable gallery</li><li>D0447 · Image CDN transforms</li><li>D0448 · Priority hint preloading</li><li>D0451 · Fade-rise entrance</li><li>D0453 · CSS view() reveals</li><li>D0488 · Reduced-motion narrative path</li><li>D0494 · Anchored scroll margins</li><li>D0551 · 44px minimum targets</li><li>D0552 · Thumb-zone layout</li><li>D0553 · Bottom-anchored actions</li><li>D0580 · Complete tab order</li><li>D0581 · Visible focus rings</li><li>D0582 · :focus-visible styling</li><li>D0583 · Skip links</li><li>D0585 · Arrow-key grid navigation</li><li>D0589 · Escape-closes-everything</li><li>D0590 · Guarded enter-submit</li><li>D0591 · Space/enter button parity</li><li>D0592 · Modal focus trap</li><li>D0593 · Focus return on close</li><li>D0594 · Reduced-motion compliance</li><li>D0595 · Voice-control compatibility</li><li>D0597 · Live-region announcements</li><li>D0598 · inputmode keyboards</li><li>D0601 · Button state quartet</li><li>D0603 · Loading-state button</li><li>D0615 · Copy-confirm morph</li><li>D0642 · Live region announcements</li><li>D0643 · Reduced-motion fallback set</li><li>D0644 · Focus-visible ring system</li><li>D0651 · Duration token scale</li><li>D0652 · Easing token library</li><li>D0665 · @starting-style entry</li><li>D0666 · transition-behavior allow-discrete</li><li>D0668 · Height auto transitions</li><li>D0673 · GPU-only property discipline</li><li>D0693 · Reduced-motion variant set</li><li>D0694 · Vestibular-safe constraints</li><li>D0745 · Route announcement region</li><li>D0859 · Last-updated timestamps</li><li>D0860 · First-use empty state</li><li>D0867 · Actionable error messages</li><li>D0876 · Draft restoration prompt</li><li>D0878 · Double-submit guard</li><li>D0895 · Form error summary</li><li>D1011 · color-mix() blending</li><li>D1038 · Forced-colors adaptation</li><li>D1150 · Trust-signal palette</li><li>D1201 · Cascade layers (@layer)</li><li>D1214 · Logical properties</li><li>D1222 · interpolate-size auto</li><li>D1225 · ::details-content</li><li>D1226 · field-sizing: content</li><li>D1227 · accent-color</li><li>D1243 · forced-colors adaptation</li><li>D1248 · Utility + layer architecture</li><li>D1251 · clamp() fluid sizing</li><li>D1268 · Logical inset positioning</li><li>D1278 · Safe-area insets</li><li>D1296 · Print stylesheet layout</li><li>D1300 · field-sizing: content</li><li>D1323 · Fluid type with clamp</li><li>D1333 · text-box-trim</li><li>D1336 · font-display strategy</li><li>D1350 · Type licensing audit</li><li>D1493 · scroll-margin / padding</li><li>D1649 · Progressive enhancement forms</li><li>D1674 · Debounced autosave</li><li>D1737 · Preview deployments</li><li>D1749 · Structured data markup</li><li>D1784 · Performance budgets in CI</li><li>D1851 · Seeded PRNG</li><li>D1856 · Perlin and simplex noise</li><li>D2018 · Calm technology aesthetic</li><li>D2019 · OS-native utilitarian</li><li>D2035 · calc-size and interpolate-size</li><li>D2037 · Stack layout primitive</li><li>D2041 · Logical-property layout</li><li>D2044 · Safe-area inset layout</li><li>D2045 · content-visibility virtualization</li><li>D2046 · contain-intrinsic-size reservation</li><li>D2050 · Scroll-state layout adaptation</li><li>D2052 · text-box-edge tuning</li><li>D2069 · from-font underline metrics</li><li>D2078 · feTurbulence grain</li><li>D2108 · Sticky nav scroll-state</li><li>D2113 · Multiple skip links</li><li>D2114 · Landmark region jumps</li><li>D2121 · Deep-link state restoration</li><li>D2122 · Progressive disclosure nav</li><li>D2124 · Wayfinding scent labels</li><li>D2126 · command and commandfor</li><li>D2137 · Pointer-coarse sizing</li><li>D2138 · Pseudo-element hit expansion</li><li>D2139 · Accessible-name discipline</li><li>D2147 · Focus-visible-only ring</li><li>D2152 · user-invalid styling</li><li>D2156 · Constraint Validation messages</li><li>D2160 · inputmode and enterkeyhint</li><li>D2165 · Autocomplete token discipline</li><li>D2171 · No-JS progressive form</li><li>D2175 · Scroll-into-view on focus</li><li>D2184 · dialog closedby control</li><li>D2185 · Backdrop pseudo styling</li><li>D2186 · Paint and layout containment</li><li>D2187 · content-visibility cards</li><li>D2188 · Link-overlay block card</li><li>D2193 · Aspect-locked media card</li><li>D2202 · decoding=async hints</li><li>D2212 · Focal-point cropping</li><li>D2213 · SVG symbol sprite system</li><li>D2227 · animation-range phases</li><li>D2233 · overscroll-behavior containment</li><li>D2244 · scroll-margin chapter targets</li><li>D2248 · Compositor-only scroll effects</li><li>D2249 · Static reduced-motion narrative</li><li>D2276 · inert background isolation</li><li>D2282 · Voice-control name matching</li><li>D2298 · Pointer-coarse target scaling</li><li>D2301 · Perceived-instant budget</li><li>D2306 · status versus alert roles</li><li>D2312 · Success persistence tuning</li><li>D2313 · Error recovery guidance</li><li>D2314 · Debounce and throttle grammar</li><li>D2318 · Micro-copy as feedback</li><li>D2324 · Focus-return guarantee</li><li>D2327 · Individual transform properties</li><li>D2335 · Asymmetric enter and exit</li><li>D2342 · Vestibular trigger audit</li><li>D2343 · Reduced-motion granularity</li><li>D2347 · Discrete property transitions</li><li>D2410 · Contour isoline plot</li><li>D2450 · Degradation ladder design</li><li>D2504 · accent-color theming</li><li>D2510 · prefers-contrast adaptation</li><li>D2519 · theme-color meta tag</li><li>D2647 · Safe-area landscape insets</li><li>D2668 · Modern system font stack</li><li>D2744 · Progressive enhancement ladder</li><li>D3002 · Warm ivory ground, never white</li><li>D3003 · Near-black ink, never black</li><li>D3006 · Alpha-tint border tokens</li><li>D3007 · Focus colour outside the palette</li><li>D3009 · Three-layer colour indirection</li><li>D3017 · Proportional lining numerals globally</li><li>D3040 · Inset box-shadow hairlines</li><li>D3051 · Four named easing tokens</li><li>D3052 · Colour-only hover transitions</li><li>D3077 · Shader-hash deterministic seeding</li><li>D3128 · Partner logo wall</li><li>D3135 · Complete sitemap as inventory</li><li>D3171 · No-transform hover discipline</li><li>D3187 · Static partner wall</li><li>D3193 · Fluid headings, fixed body</li><li>D3245 · Iteration-timeline case study</li><li>D3359 · Config-hash regeneration</li><li>D3373 · Mode-invariant brand accent</li><li>D3399 · </li><li>D3404 · Dimming ink links</li><li>D3425 · Commerce view() reveals</li><li>D3428 · Flat tiles, dressed controls</li><li>D3432 · Relative-color state layers</li><li>D3453 · Reduced-motion as a hard gate</li><li>D3458 · Optical tracking table</li><li>D3465 · Invisible-link plus real-button pair</li><li>D3468 · Non-round house durations</li><li>D3746 · Forgiving-format input</li><li>D3780 · Status dot with text twin</li><li>D3790 · Step-by-step journey navigation</li><li>D3792 · Transaction confirmation page</li><li>D3796 · Third-party review badge strip</li><li>D3813 · Plain-language policy summary</li><li>D3821 · Disclosure at body contrast</li><li>D3876 · </li><li>D4187 · Audit-badge footer</li><li>D4198 · Alpha line tokens</li><li>D4225 · Trust-claim copy triad</li><li>D4262 · Scrolled hairline by self-timeline</li><li>D4311 · Brand-chrome theme-color</li><li>D4653 · Overline-numbered takeaway grid</li><li>D4656 · Monoculture transition pair</li><li>D4657 · Version-stamped token root</li><li>D4980 · In-page Reduce-Motion Toggle</li><li>D4987 · Carbon-Aware Interface Budget</li><li>D5252 · Seasonal eight-step ground sheets</li><li>D5303 · </li><li>D5639 · State-attribute dialog lightbox</li><li>D5641 · Section-tracking document title</li><li>D6468 · Parameter readout captions</li><li>D6548 · OG Image At 1200 × 630</li></ul>
+    <h3>Surface plan record</h3><pre># SP-01c · Fitz Feral Hunters · PADDOCK v3 — the card colourway (diff-mode SP, D700 §0D)
+
+Compiled against: STAMP :: D700 · 4 Oct 2026 · 6511 entries D0001-D6558 · 218 laws · 387 capsules · 466 groups · 1824 pairs · 499 anti-pairs · 457 palettes · 21 lenses
+Measured state before the diff: SP-01b (topographic sheet layer), 17/17 VERIFIED. The client supplied the business card (dark green, gold, near-white type, rifle mark, Trajan-style capitals) and asked for the mockup adapted to that colourway with the logo on the site.
+Lenses: LENS-14 leads (the brand is the place&#x27;s own artefact; the card is the one reference), LENS-02 (colours sampled, not eyeballed; the card shown as supplied), LENS-12 still governs density, LENS-04 the controls. TENSION-05: universal grid, local parameters — the sheet layer is untouched, only the tokens and the display face move.
+
+PALCAND &quot;FFH Card&quot; :: BG #f8f6f2 (kept from PAL Noma Forest Season) · SURFACE #f1eee8 · INK #1b2622 (card green, sampled rgb 27 38 34) · CHROME #1b2622 for header, footer and the invert band · GOLD #a07a48 (the card&#x27;s &quot;Fitz&quot; and rifle wood, rgb 160 122 72) · GOLD-LIGHT #cdb682 (the insured line, rgb 205 182 130) · GOLD-INK = color-mix(gold, ink 32%) for small text on cream · ACCENT (primary action on light) = color-mix(chrome, white 12%) · functional focus #2c84db / #7cb8ff, error #9b2c20, ok #2E6E4E.
+Budget (PALRULE-02): green = ink, chrome and the primary action; gold = the trust semantic only (credential and triad overlines, the cred-strip rule, footer labels, nav current state) and, as a designed twin (D3399, PALRULE-05), the primary action on dark bands where the green button would vanish. No third hue.
+
+SP-01c :: Fitz Feral Hunters :: SURFACES=all (delta only) :: CITES=SP-01 + SP-01b plus D0159 (Content-extracted accents) · D0049 (Duotone identity) · D5303 (Inverse-pair section theming) · D3399 (Interactive accent twin) · D3876 (Monochrome admin brand fill) · PAIR-184 · PAIR-982 · D0107 (Serif revival editorial) [display face: Cinzel, the open equivalent of the card&#x27;s inscriptional capitals; body stays Barlow] · D0106 (Display + body pairing) · D1350 (Type licensing audit) · D3373 (Mode-invariant brand accent) · LAW-83 · LAW-06 · PALRULE-05 · D0443 (Descriptive alt strategy) · D0448 (Priority hint preloading) · LENS-14 · LENS-02 :: FLOOR=unchanged + 10 delta asserts
+
+## ASSERT lines (delta)
+ASSERT :: all :: header and footer ground = #1b2622, the card&#x27;s green; body ink = #1b2622 on #f8f6f2 :: PER=D5303 (Inverse-pair section theming) · D0159 (Content-extracted accents) · PAIR-982
+ASSERT :: all :: the logo lockup renders in the header (56px tall) and footer from /brand/logo-lockup.png with a descriptive alt; the card itself appears on About as supplied :: PER=D0443 (Descriptive alt strategy) · D0448 (Priority hint preloading) · LENS-02
+ASSERT :: all :: saturated-hue census = {green family, gold #a07a48, champagne #cdb682, focus, error, ok} and nothing else :: PER=D3004 (One reserved accent) · PALRULE-02 · D0049 (Duotone identity)
+ASSERT :: all :: gold text appears on cream only as --gold-ink (≥ 4.5:1) and on green only as --gold-light (≥ 6:1); raw #a07a48 never carries small text on cream :: PER=D0192 (APCA contrast pairing) · LENS-15
+ASSERT :: all :: contrast: body ≥ 12:1, nav text on chrome ≥ 12:1, gold button ≥ 7:1 (measured 7.9), green button ≥ 9:1, gold-ink descriptors ≥ 4.5:1 :: PER=D0192 (APCA contrast pairing) · LENS-15
+ASSERT :: all :: one primary button on light (green) and its designed twin on dark (champagne gold); no third button fill :: PER=D3399 (Interactive accent twin) · PALRULE-05 · D3876 (Monochrome admin brand fill) · PAIR-184
+ASSERT :: all :: h1/h2 in Cinzel 700 uppercase; h3, plates and body in Barlow; exactly three families loaded, all SIL OFL :: PER=D0106 (Display + body pairing) · D0107 (Serif revival editorial) · D1350 (Type licensing audit)
+ASSERT :: all :: the contour tile is re-inked #1b2622 at the same .075/.12 alphas; the seed and geometry are unchanged :: PER=D2410 (Contour isoline plot) · LAW-10
+ASSERT :: all :: hover census still transformChanged = 0, shadowChanged = 0; focus rings flip to #7cb8ff on the dark bands :: PER=D3171 (No-transform hover discipline) · LAW-83 · D3007 (Focus colour outside the palette)
+ASSERT :: all :: brand assets: lockup PNG ≤ 60 KB, card JPG ≤ 120 KB, loaded once; index.html ≤ 120 KB :: PER=D4987 (Carbon-Aware Interface Budget) · LENS-06
+
+MEASURE :: probe rounds=2 (round 1: 3 flagged — the derived gold-ink counted as a third hue, the gold-button claim was set at 9:1 against a measured 7.9:1, and the focus probe tabbed into the reviewer bar; two were probe corrections, one an over-claimed number) · final pass rate=12/12 · weight: index 107 KB, lockup 50 KB, card 116 KB · rig: Playwright Chromium against a local http serve of public/
+</pre>
     <h3>What Fitz supplies before launch</h3>
-    <ul style="margin:0;padding-left:18px;display:grid;gap:4px"><li>Logo (SVG or high-res PNG) for the header slot.</li><li>Photos: hero, two about shots, nine gallery shots at 1600px wide, with a one-line description each for alt text.</li><li>Instagram bio wording for the hero lede.</li><li>Testimonials with name, property type and locality (or a Google Business reviews link).</li><li>Pricing line for the first FAQ, ABN for the footer, and whether thermal drone services stay on the Services page.</li></ul>
+    <ul style="margin:0;padding-left:18px;display:grid;gap:4px"><li>A vector or larger logo file if one exists (the current lockup is cut from the card).</li><li>Photos: hero, two about shots, nine gallery shots at 1600px wide, with a one-line description each for alt text.</li><li>Instagram bio wording for the hero lede.</li><li>Testimonials with name, property type and locality (or a Google Business reviews link).</li><li>Pricing line for the first FAQ, ABN for the footer, and whether thermal drone services stay on the Services page.</li></ul>
   </div>
 </dialog>
 <script>
