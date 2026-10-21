@@ -80,6 +80,16 @@ PADDOCK = {
              "PALRULE-01","PALRULE-04","PAIR-356","PAIR-958","D5252"],
   "setpiece": ["D3187","D3128","D4653","LAW-15","LENS-13","LENS-04"],
   "hero-layout": ["D0061"],
+  # v2 — the topographic sheet layer (LENS-12 leads, LENS-14 names the reference, TENSION-01/05/06 resolved)
+  "topo": ["D2410","D0041","D1851","D1856","D3077","D3359","D0436","D4987","D0191",
+           "PAIR-06","PAIR-794","LAW-10","LENS-12","LENS-14","TENSION-01","TENSION-05","TENSION-06"],
+  "meta": ["D0140","D0142","D6468","D0041","D2124","PAIR-794"],
+  "scalebar": ["D0041","D0142","D0436","D6468"],
+  "map": ["D0436","D2213","D0041","D0142","D0191","D3780","D0443","LAW-23","LENS-14","PAIR-125"],
+  "legend": ["D0436","D2213","LAW-23","D0191","D0041"],
+  "marginalia": ["D0098","D0433","D0140","LENS-14","LENS-02"],
+  "frame": ["D0041","D0433","D3813","LENS-07"],
+  "ledger": ["D0142","D0041","PAIR-794"],
 }
 
 NIGHT = {

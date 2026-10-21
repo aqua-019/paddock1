@@ -1,0 +1,17 @@
+VERIFIED :: SP-01b :: all :: contour strokes: bark ink, ≤ .12 alpha :: claimed=#432a27, .075 / .12 measured=#432a27, 0.075 / 0.12 :: PER=D2410 · D3006
+VERIFIED :: SP-01b :: all :: page weight :: claimed=index ≤ 120 KB, tile ≤ 75 KB measured=index 100 KB, tile 69 KB :: PER=D4987 · LENS-06
+VERIFIED :: SP-01b :: all :: seeded field: three builds hash identically :: claimed=one hash measured=5c729a62 5c729a62 5c729a62 :: PER=D1851 · D3077 · LAW-10 · PAIR-06
+VERIFIED :: SP-01b :: all :: contour layer = body::after fixed, z −1, no animation :: claimed=fixed / -1 / none / svg measured=fixed / -1 / none / url("file:///topo-tile.svg"), repeating-linear-gradient(90de :: PER=D2410 · LAW-44 · D3453
+VERIFIED :: SP-01b :: all :: grid cell 150px = 1 km :: claimed=150px measured=1200px 1200px, 150px 150px, 150px 150px :: PER=D0041 · D6468
+VERIFIED :: SP-01b :: all :: scale bar width :: claimed=150px measured=150.0px :: PER=D0041 · D6468
+VERIFIED :: SP-01b :: all :: saturated-hue census unchanged :: claimed=accent + focus + error only measured=rgb(46, 110, 78) :: PER=D3004 · PALRULE-02
+VERIFIED :: SP-01b :: all :: token contrast unchanged :: claimed=body ≥12, ink-2 ≥7, button ≥5.9 measured={"body":"12.17","ink2":"7.07","btn":"6.08"} :: PER=D0192 · LENS-15
+VERIFIED :: SP-01b :: all :: hover census (40 candidates) :: claimed=transformChanged=0 shadowChanged=0 measured=transformChanged=0 shadowChanged=0 :: PER=D3171 · LAW-03
+VERIFIED :: SP-01b :: home :: locality map: 10 rings + 1 base square, labelled :: claimed=10 / 1 / aria-label measured=10 / 1 / "Schematic map of the service area: Warra" :: PER=D0436 · D0191 · LAW-23 · LENS-14
+VERIFIED :: SP-01b :: home :: grid references on chips :: claimed=11 chips, Warragul GR 063 758 measured=11 chips, "WarragulGR 063 758" :: PER=D0142 · PAIR-794 · LENS-02
+VERIFIED :: SP-01b :: home :: map key: 8 shape+text entries :: claimed=8, all with text measured=8, text=true :: PER=D3780 · PAIR-125 · LAW-23
+VERIFIED :: SP-01b :: all :: photo frames: 4 ticks + privacy plate :: claimed=every slot measured=true :: PER=D0041 · D3813 · LENS-07
+VERIFIED :: SP-01b :: services :: marginalia column + resolving footnotes :: claimed=2 columns, all markers resolve, sticky measured=2 cols, resolve=true, sticky :: PER=D0098 · D0433
+VERIFIED :: SP-01b :: all (<700px) :: grid dropped, field .8, body 17px, no overflow, map scrolls :: claimed=1 layer / .8 / 17px / no overflow / auto measured=1 / 0.8 / 17px / 390≤390 / auto :: PER=D3193 · LENS-15
+VERIFIED :: SP-01b :: all :: reduced motion: no time-driven animation constructed (scroll-state sensors allowed) :: claimed=0 clock animations measured=0 clock, sensors=[scrolled-line], reveal=none :: PER=D3453 · LAW-12 · LAW-67
+VERIFIED :: SP-01b :: all :: console/page errors :: claimed=0 measured=0  :: PER=contract

@@ -1,7 +1,7 @@
 # paddock1 — Fitz Feral Hunters, Paddock composition
 
 Static site for a Gippsland pest and vermin control business, compiled from the D700 design catalogue
-(surface plan **SP-01 PADDOCK**: TP04 The Calm Commerce Front on DY01 Calm interface, PAL Noma Forest Season
+(surface plans **SP-01 PADDOCK** and its v2 delta **SP-01b** — the topographic sheet layer: TP04 The Calm Commerce Front on DY01 Calm interface, PAL Noma Forest Season
 with the Forest Institutional green as the one action colour, motion kit MK-01). Every component carries a
 `data-per` attribute naming the catalogue records it honours; the **Spec sheet** button on the site lists them.
 
@@ -11,6 +11,7 @@ with the Forest Institutional green as the one action colour, motion kit MK-01).
 content/site.json   ← the only file to edit for contact details, credentials, services, FAQ, localities, photos
 src/build.py        ← generator: python3 src/build.py  → writes public/
 src/css.py          ← stylesheet (tokens at the top)
+src/topo.py         ← seeded contour tile (periodic noise + marching squares) and MGA zone 55 grid references
 src/cites.py        ← catalogue citations per component
 public/             ← the deployed site (generated, committed so Vercel needs no build step)
 api/enquiry.js      ← Vercel function behind the contact form

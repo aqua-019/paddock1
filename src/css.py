@@ -26,6 +26,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 
 @layer base{
 *,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:.98;margin:0;text-wrap:balance;text-transform:uppercase;text-box:trim-both cap alphabetic}
 h1{font-size:var(--fs-h1);letter-spacing:-.01em}
@@ -314,6 +315,100 @@ fieldset{border:0;padding:0;margin:0;min-width:0}
 @media (prefers-contrast: more){
   :root{--line:var(--line-strong);--ink-2:var(--ink)}
 }
+}
+
+@layer components{
+/* ---- v2 topographic sheet layer (SP-01b): contour field, MGA grid, map marginalia. Every stroke is bark ink at ≤12% alpha; nothing animates. */
+:root{--km:150px; --topo-alpha:1}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:var(--topo-alpha);
+  background-image:url("@@TOPO@@"),
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--ink) 6%, transparent) 0 1px, transparent 1px var(--km)),
+    repeating-linear-gradient(180deg, color-mix(in srgb, var(--ink) 6%, transparent) 0 1px, transparent 1px var(--km));
+  background-size:1200px 1200px, var(--km) var(--km), var(--km) var(--km);background-position:0 0, 0 0, 0 0}
+@media (max-width:699px){body::after{background-image:url("@@TOPO@@");background-size:900px 900px;--topo-alpha:.8}}
+@media print{body::after{display:none}}
+.band.alt{background:color-mix(in srgb, var(--surface) 86%, transparent)}
+.site-head{background:color-mix(in srgb, var(--bg) 96%, transparent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.tile,.ghost,.field input,.field textarea,.confirm,.summary{background:color-mix(in srgb, var(--bg) 92%, transparent)}
+.tile{background:color-mix(in srgb, var(--bg) 94%, transparent)}
+
+/* sheet meta line on section heads */
+.meta{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;font:500 11px/1.4 var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.meta b{font-weight:700;color:var(--ink)}
+.meta .lead{flex:1 1 40px;min-width:24px;border-bottom:1px dotted var(--line-strong);translate:0 -4px}
+.sec-head .meta{order:-1}
+
+/* north arrow + datum chip in the header */
+.datum{display:none;align-items:center;gap:8px;margin-inline-start:12px;font:600 10px/1.2 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+@media (min-width:1100px){.datum{display:inline-flex}}
+.north{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linejoin:round}
+.north .fill{fill:currentColor;stroke:none}
+
+/* scale bar: 150 px = 1 km at this sheet's scale */
+.scalebar{display:flex;align-items:flex-end;gap:0;font:500 10px/1 var(--font-mono);letter-spacing:.06em;color:var(--ink-2);margin:0;user-select:none}
+.scalebar .bar{display:flex;height:6px;width:var(--km);box-shadow:inset 0 0 0 1px var(--ink)}
+.scalebar .bar i{flex:1;background:var(--ink)}
+.scalebar .bar i:nth-child(even){background:transparent}
+.scalebar .ticks{display:flex;justify-content:space-between;width:calc(var(--km) + 2.2ch);margin-left:-1.1ch;margin-top:5px}
+.scalebar .ticks span{text-align:center;width:2.2ch}
+.scalebar .unit{margin-left:10px;margin-bottom:1px}
+.scalebar.stack{flex-direction:column;align-items:flex-start}
+.divider{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:14px;border-top:1px solid var(--line)}
+.divider .mono{color:var(--ink-2);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+
+/* locality map + legend */
+.area-grid{display:grid;gap:28px}
+@media (min-width:900px){.area-grid{grid-template-columns:minmax(0,7fr) minmax(0,5fr);align-items:start}}
+.map-scroll{overflow-x:auto;overscroll-behavior-x:contain;border-radius:var(--radius)}
+@media (max-width:699px){.map-scroll .map{min-width:640px}.map-scroll::after{content:"scroll sideways for the whole sheet";display:block;font:500 11px/1.4 var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);padding:6px 0 0}}
+.map{display:block;width:100%;height:auto;background:color-mix(in srgb, var(--bg) 70%, transparent);box-shadow:inset 0 0 0 1px var(--line-strong);border-radius:var(--radius)}
+.map text{font-family:var(--font-mono);font-size:11px;fill:var(--ink);letter-spacing:.04em}
+.map .edge{font-size:9.5px;fill:var(--ink-2)}
+.map .grid{stroke:var(--ink);stroke-opacity:.14;stroke-width:1}
+.map .ring{fill:none;stroke:var(--ink);stroke-width:1;stroke-dasharray:3 4;stroke-opacity:.55}
+.map .town{fill:var(--bg);stroke:var(--ink);stroke-width:1.6}
+.map .base{fill:var(--accent);stroke:var(--ink);stroke-width:1.2}
+.map .frame{fill:none;stroke:var(--ink);stroke-width:1}
+.map .scale{stroke:var(--ink);stroke-width:1}
+.legend{display:grid;gap:10px;align-content:start}
+.legend dl{margin:0;display:grid;grid-template-columns:56px minmax(0,1fr);gap:8px 14px;align-items:center;font-size:var(--fs-small)}
+.legend dt{height:18px;display:flex;align-items:center}
+.legend dd{margin:0;color:var(--ink-2)}
+.legend dd b{color:var(--ink);font-weight:600}
+.legend svg{width:56px;height:18px;overflow:visible}
+.legend .k{stroke:var(--ink);fill:none;stroke-width:1.2}
+.chips li .gr{font:500 11px/1 var(--font-mono);letter-spacing:.04em;color:var(--ink-2);margin-left:8px}
+
+/* marginalia beside prose */
+.notes-layout{display:grid;gap:24px}
+@media (min-width:900px){.notes-layout{grid-template-columns:minmax(0,1fr) 15rem;gap:48px;align-items:start}}
+.margin-notes{display:grid;gap:14px;font-size:var(--fs-caption);line-height:1.45;color:var(--ink-2);border-left:1px solid var(--line-strong);padding-left:16px;position:sticky;top:calc(var(--head-h) + 24px)}
+@media (max-width:899px){.margin-notes{position:static;border-left:0;padding-left:0;border-top:1px dotted var(--line-strong);padding-top:14px}}
+.margin-notes p{display:grid;grid-template-columns:2ch 1fr;gap:6px}
+.margin-notes sup,.fn{font:700 10px/1 var(--font-mono);color:var(--ink);vertical-align:super;margin-left:2px}
+.margin-notes h4{font:600 11px/1.3 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);text-box:normal}
+
+/* photo frames: registration ticks + privacy plate */
+.slot .corner{position:absolute;width:12px;height:12px;z-index:2;border:1.5px solid color-mix(in srgb, var(--foot-ink) 85%, transparent)}
+.slot .corner.tl{top:8px;left:8px;border-right:0;border-bottom:0}.slot .corner.tr{top:8px;right:8px;border-left:0;border-bottom:0}
+.slot .corner.bl{bottom:8px;left:8px;border-right:0;border-top:0}.slot .corner.br{bottom:8px;right:8px;border-left:0;border-top:0}
+.slot .plate{position:absolute;right:10px;top:10px;z-index:2;font:600 9px/1.2 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);background:color-mix(in srgb, var(--bg) 78%, transparent);padding:3px 6px;border-radius:3px}
+.slot .label{inset-inline:22px;bottom:22px}
+
+/* ledger list with dotted leaders */
+.ledger{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.ledger li{display:flex;align-items:baseline;gap:8px;font-size:var(--fs-small)}
+.ledger li b{font-weight:600;white-space:nowrap}
+.ledger li .lead{flex:1;border-bottom:1px dotted var(--line-strong);min-width:16px;translate:0 -4px}
+.ledger li span:last-child{color:var(--ink-2);text-align:right}
+
+/* footer marginalia */
+.site-foot .margin{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;font:500 11px/1.5 var(--font-mono);letter-spacing:.05em;text-transform:uppercase;color:color-mix(in srgb, var(--foot-ink) 65%, transparent);border-top:1px solid var(--foot-line);padding-top:14px}
+.site-foot .scalebar{color:color-mix(in srgb, var(--foot-ink) 75%, transparent)}
+.site-foot .scalebar .bar{box-shadow:inset 0 0 0 1px var(--foot-ink)}
+.site-foot .scalebar .bar i{background:var(--foot-ink)}
+.site-foot .scalebar .bar i:nth-child(even){background:transparent}
+.site-foot .north{color:color-mix(in srgb, var(--foot-ink) 75%, transparent)}
 }
 
 @layer review{
