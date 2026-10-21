@@ -15,7 +15,7 @@ src/topo.py         ← seeded contour tile (periodic noise + marching squares) 
 src/cites.py        ← catalogue citations per component
 public/             ← the deployed site (generated, committed so Vercel needs no build step)
 api/enquiry.js      ← Vercel function behind the contact form
-docs/               ← SP-01 / SP-01b / SP-01c records, probe verdicts, FOLD lines
+docs/               ← SP-01 … SP-01e records, probe verdicts, FOLD lines
 public/brand/       ← logo lockup (keyed PNG for dark bands, JPG plate), rifle mark, the card as supplied
 ```
 
@@ -31,7 +31,7 @@ gallery/hero/about entry in `site.json`. Empty string keeps the labelled placeho
 Testimonials: add `["quote", "Name · property type · locality"]` pairs to `testimonials`; the empty-state
 cards disappear once there is at least one.
 
-Design switches: `"sheet_layer": false` keeps the v0.2 topographic layer (contour field, grid, grid references, locality map) off; `"thermal_drone": true` shows the DJI Matrice 4T drone band and service.
+Design switches: `"sheet_layer": true` draws the topographic sheet (contour field, grid, grid references, scale bars, datum line); `"sheet_map": true` adds the locality map and key on the home page (off since v0.3.2 at the client's request); `"thermal_drone": true` shows the DJI Matrice 4T drone band and service. Contour density is set in `src/build.py` (`TOPO_SCALE`, `contour_svg(...)`).
 
 Launch switches: set `"indexable": true` (removes `noindex` and opens `robots.txt`), fill `abn`,
 `credentials_current`, and remove `lede_flag` once the Instagram wording is in.

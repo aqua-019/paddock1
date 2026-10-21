@@ -23,12 +23,16 @@ X = cites.PADDOCK
 SEED = "fitzferalhunters-paddock"
 ARTIFACT = '--artifact' in sys.argv
 SHEET = bool(S.get('sheet_layer', False))   # the v0.2 topographic layer: off from v0.3.1 at the client's request
+SHEET_MAP = SHEET and bool(S.get('sheet_map', False))   # the locality map + key: off at the client's request from v0.3.1
 SHEET_KEYS = {'topo', 'meta', 'scalebar', 'map', 'legend'}
+MAP_KEYS = {'map', 'legend'}
+TOPO_SCALE = 0.5   # v0.3.2: the 1200px tile is drawn at 600px — 3× the line density of v0.2
 
 def esc(s): return html.escape(str(s), quote=True)
 
 def per(key):
     if key in SHEET_KEYS and not SHEET: return ''
+    if key in MAP_KEYS and not SHEET_MAP: return ''
     ids = list(cites.SHARED.get(key, [])) + list(X.get(key, []))
     ds = [i for i in ids if re.match(r'^D\d{4}$', i)]
     return f' data-per="{" ".join(dict.fromkeys(ds))}"' if ds else ''
@@ -37,7 +41,7 @@ def per(key):
 TOKENS = """
   /* PALCAND "FFH Card" — sampled from the client's card: green #1b2622, gold #a07a48, champagne #cdb682, near-white type; ground kept from PAL Noma Forest Season */
   --bg:#f8f6f2; --surface:#f1eee8; --surface-2:color-mix(in srgb, var(--bg), var(--ink) 7%);
-  --ink:#1b2622; --ink-2:color-mix(in srgb, var(--ink) 72%, var(--bg)); --ink-3:color-mix(in srgb, var(--ink) 38%, var(--bg));
+  --ink:#1b2622; --ink-2:color-mix(in srgb, var(--ink) 80%, var(--bg)); --ink-3:color-mix(in srgb, var(--ink) 38%, var(--bg));
   --chrome:#1b2622; --chrome-2:color-mix(in srgb, var(--chrome), #ffffff 7%);
   --gold:#a07a48; --gold-light:#cdb682; --gold-ink:color-mix(in srgb, var(--gold), var(--ink) 32%);
   --accent:color-mix(in srgb, var(--chrome), #ffffff 12%); --accent-ink:#f8f6f2;
@@ -54,7 +58,7 @@ GRAIN = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16
          "%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E"
          "%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1 0'/%3E%3C/filter%3E"
          "%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")
-TOPO_SVG = topo.contour_svg(seed=SEED, color='#1b2622')
+TOPO_SVG = topo.contour_svg(seed=SEED, color='#1b2622', cells=120, interval=1/30, minor_width=1.3, index_width=2.2, minor_alpha=0.11, index_alpha=0.17)
 TOPO_URI = topo.svg_data_uri(TOPO_SVG) if ARTIFACT else '/topo-tile.svg'
 import base64
 def asset(path):
@@ -63,7 +67,9 @@ def asset(path):
     p = PUB / path.lstrip('/'); mime = 'image/png' if p.suffix == '.png' else 'image/jpeg'
     return f'data:{mime};base64,' + base64.b64encode(p.read_bytes()).decode()
 css = (CSS.replace('@@TOKENS@@', TOKENS).replace('@@STAMP@@', STAMP).replace('@@GRAIN@@', GRAIN)
-          .replace('@@TOPO@@', TOPO_URI).replace('@@SCHEME@@', 'light'))
+          .replace('@@TOPO@@', TOPO_URI).replace('@@SCHEME@@', 'light')
+          .replace('background-size:1200px 1200px,', f'background-size:{int(1200*TOPO_SCALE)}px {int(1200*TOPO_SCALE)}px,')
+          .replace('background-size:900px 900px;--topo-alpha:.8', f'background-size:{int(900*TOPO_SCALE)}px {int(900*TOPO_SCALE)}px;--topo-alpha:.85'))
 if not SHEET:
     css = re.sub(r'body::after\{[^}]*\}', '', css)                       # the contour/grid field
     css = css.replace("[data-sheet='off'] body::after{display:none}", '')
@@ -187,7 +193,7 @@ def varbar():
     return f'''
 <div class="varbar" id="varbar"{per("varbar")} role="region" aria-label="Mockup controls">
   <div class="wrap">
-    <span><strong>D700 mockup · {'SP-01c PADDOCK v0.3' if SHEET else 'SP-01d PADDOCK v0.3.1'}</strong><span class="long"> · card colourway (green · gold · cream){' on the topographic sheet · seed ' + esc(SEED) if SHEET else ' · all of Victoria'}</span></span>
+    <span><strong>D700 mockup · {'SP-01e PADDOCK v0.3.2' if SHEET else 'SP-01d PADDOCK v0.3.1'}</strong><span class="long"> · card colourway (green · gold · cream){' · dense topographic sheet, no map · seed ' + esc(SEED) if SHEET else ' · all of Victoria'}</span></span>
     <span class="grow"></span>
     <button type="button" id="t-motion" aria-pressed="false" title="Emulates the reduced-motion twin (D4980); the real gate is the media query (D3453)"><span class="long">Motion: on</span><span class="short">Motion</span></button>
     {'<button type="button" id="t-topo" aria-pressed="true" title="Toggle the contour field and grid (D2410) to compare against v1"><span class="long">Sheet: on</span><span class="short">Sheet</span></button>' if SHEET else ''}
@@ -199,12 +205,13 @@ def varbar():
 </div>'''
 
 def spec_dialog():
-    spfile = (ROOT / 'docs' / ('SP-01c-ffh-paddock-v3.md' if SHEET else 'SP-01d-ffh-paddock-v3-1.md'))
+    spfile = (ROOT / 'docs' / ('SP-01e-ffh-paddock-v3-2.md' if SHEET else 'SP-01d-ffh-paddock-v3-1.md'))
     spfile = spfile.read_text() if spfile.exists() else '(SP record not found in docs/)'
     allids = []
     for grp in (cites.SHARED, X, cites.TOP):
         for k, ids in grp.items():
             if k in SHEET_KEYS and not SHEET: continue
+            if k in MAP_KEYS and not SHEET_MAP: continue
             allids += ids
     uniq = list(dict.fromkeys(allids))
     d_entries = sorted(i for i in uniq if re.match(r'^D\d{4}$', i))
@@ -218,10 +225,10 @@ def spec_dialog():
     counts = f'''<span>{len(d_entries)} entries</span><span>{len(laws)} laws</span><span>{len(pairs)} pairs</span><span>{len(nopairs)} anti-pairs resolved</span><span>{len(pals)} palette records</span><span>{len(lenses)} doctrine records</span><span>{len(tops)} templates/dynamics/kits</span><span>{len(uniq)} citations total</span>'''
     return f'''
 <dialog class="spec" id="spec"{per("spec")} aria-labelledby="spec-title">
-  <div class="bar"><h2 id="spec-title">{'SP-01c · PADDOCK v0.3' if SHEET else 'SP-01d · PADDOCK v0.3.1'} · spec sheet</h2><button type="button" class="btn btn-secondary" id="spec-close" aria-label="Close spec sheet">&times;</button></div>
+  <div class="bar"><h2 id="spec-title">{'SP-01e · PADDOCK v0.3.2' if SHEET else 'SP-01d · PADDOCK v0.3.1'} · spec sheet</h2><button type="button" class="btn btn-secondary" id="spec-close" aria-label="Close spec sheet">&times;</button></div>
   <div class="inner">
     <p class="counts">{counts}</p>
-    <p>Compiled against <span class="mono">{esc(STAMP)}</span>. Every component on the page carries a <span class="mono">data-per</span> attribute naming the records it honours; switch on X-ray and hover any outlined component to read them. {'The v0.2 topographic sheet layer (seeded contour field, grid, grid references, map) is switched off from v0.3.1 at the client\'s request; the generator keeps it behind <span class="mono">sheet_layer</span> in content/site.json.' if not SHEET else 'The v0.2 delta adds the topographic sheet layer: a seeded contour field, an MGA-style 1 km grid, real zone-55 grid references, scale bars, a map key, marginalia and photo registration frames.'}</p>
+    <p>Compiled against <span class="mono">{esc(STAMP)}</span>. Every component on the page carries a <span class="mono">data-per</span> attribute naming the records it honours; switch on X-ray and hover any outlined component to read them. {'The v0.2 topographic sheet layer is switched off behind <span class="mono">sheet_layer</span> in content/site.json.' if not SHEET else 'The topographic sheet layer (seeded contour field, MGA-style 1 km grid, real zone-55 grid references, scale bars, marginalia, photo registration frames) runs at 3× the v0.2 line density: the same 1200px tile drawn at 600px with 29 levels; the locality map and key are off at the client\'s request (<span class="mono">sheet_map</span>).'}</p>
     <h3>Templates, dynamics, motion kit</h3><p class="mono">{' · '.join(tops)}</p>
     <h3>Palettes and colour rules</h3><p class="mono">{' · '.join(pals)}</p>
     <h3>Doctrine lenses</h3><p class="mono">{' · '.join(lenses)}</p>
@@ -420,7 +427,7 @@ def home_body():
   <div class="wrap stack" style="--gap:24px">
     <div class="sec-head reveal"><p class="eyebrow">Service area</p><h2>Based in {esc(S['base'])}, covering all of Victoria</h2>
       <p class="measure">Gippsland is home ground, but the ute goes anywhere in the state: the Latrobe Valley, the Peninsula, the North East, the Western District and everywhere between. Ring and we'll work out the trip.</p></div>
-    {'<div class="area-grid reveal"><div class="map-scroll">' + locality_map() + '</div>' + legend() + '</div>' if SHEET else ''}
+    {'<div class="area-grid reveal"><div class="map-scroll">' + locality_map() + '</div>' + legend() + '</div>' if SHEET_MAP else ''}
     <ul class="chips reveal" aria-label="Regions served">{chips}</ul>
   </div>
 </section>
@@ -745,6 +752,7 @@ def main():
     for grp in (cites.SHARED, X, cites.TOP):
         for k, ids in grp.items():
             if k in SHEET_KEYS and not SHEET: continue
+            if k in MAP_KEYS and not SHEET_MAP: continue
             allids.update(ids)
     n_entries = len([i for i in allids if re.match(r"^D\d{4}$", i)])
     if ARTIFACT:

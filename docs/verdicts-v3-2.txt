@@ -1,0 +1,9 @@
+VERIFIED :: SP-01e :: all :: tile weight :: claimed=≤ 135 KB measured=129 KB (gzip 51 KB) :: PER=D4987
+VERIFIED :: SP-01e :: all :: contour density at drawn scale :: claimed=≥ 170 px/1000px² (3× v0.2 = 58) measured=175 px/1000px² (3.0×) :: PER=D2410 · LENS-12
+VERIFIED :: SP-01e :: all :: stroke ink and alphas :: claimed=#1b2622 .11/.17 measured=#1b2622 0.11/0.17 :: PER=D3006 · LENS-04
+VERIFIED :: SP-01e :: all :: seeded field: builds hash identically :: claimed=one hash measured=6b40fb23 6b40fb23 6b40fb23 :: PER=D1851 · LAW-10
+VERIFIED :: SP-01e :: all :: tile drawn at 600px :: claimed=600px measured=true 600px 600px :: PER=D2410
+VERIFIED :: SP-01e :: home :: map/key off; meta, scale bars, datum on :: claimed=0/0 · >0 · >0 · 1 measured=0/0 · 1 · 8 · 1 :: PER=client · D0041
+VERIFIED :: SP-01e :: all :: token contrast :: claimed=body≥12 ink-2≥7 measured={"body":14.44,"ink2":7.76} :: PER=D0192 · LENS-15
+VERIFIED :: SP-01e :: all (390px) :: tile 450px at .85, no overflow :: claimed=450px / .85 measured=450px 450px / 0.85 / 390≤390 :: PER=LENS-15
+VERIFIED :: SP-01e :: all :: console/page errors :: claimed=0 measured=0 :: PER=contract
