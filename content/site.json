@@ -13,11 +13,12 @@
   "facebook": "https://www.facebook.com/search/top?q=Fitz%20Feral%20Hunters",
   "facebook_label": "Fitz Feral Hunters",
   "base": "Warragul",
-  "region": "Gippsland and regional Victoria",
+  "region": "all of Victoria",
+  "sheet_layer": false,
   "abn": "",
-  "status_line": "Taking enquiries across Gippsland",
+  "status_line": "Taking enquiries across Victoria",
   "credentials_current": "",
-  "headline": "Professional pest & vermin control across Gippsland",
+  "headline": "Professional pest & vermin control across Victoria",
   "lede": "Licensed, insured feral animal control for farmers and landholders. Deer, kangaroos, pigs, foxes, rabbits and wild dogs, planned properly, done humanely, and the place left as I found it.",
   "lede_flag": "swap for Instagram bio wording",
   "night_shift_url": "https://claude.ai/artifact/4PrRTSy2hk4rb2sk4bysiz",
@@ -67,9 +68,9 @@
     ["thermal", "Thermal image, pigs at a dam", ""],
     ["property", "Fence line after a kangaroo program", ""],
     ["night", "Spotlight work along a tree line", ""],
-    ["gear", "Drone and thermal kit, packed", ""]
+    ["gear", "DJI Matrice 4T thermal drone, packed", ""]
   ],
   "hero_photo": ["thermal", "Thermal spotting from the ute, night job", ""],
   "about_photos": [["gear", "Fitz with the thermal kit, Warragul", ""], ["property", "Gippsland paddock at first light", ""]],
-  "area": ["Warragul", "Drouin", "Moe", "Morwell", "Traralgon", "Sale", "Leongatha", "Korumburra", "Yarram", "Bairnsdale", "Neerim South", "Further by arrangement"]
+  "area": ["Gippsland", "Latrobe Valley", "South Gippsland", "East Gippsland", "Mornington Peninsula", "Yarra Valley & Dandenongs", "North East & High Country", "Goulburn Valley", "Central Victoria", "Western District", "Wimmera & Mallee", "Anywhere in Victoria by arrangement"]
 }

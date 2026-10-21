@@ -125,6 +125,7 @@ h1[tabindex="-1"]:focus-visible,h3[tabindex="-1"]:focus-visible,.confirm:focus-v
 .page+.page{box-shadow:inset 0 1px 0 var(--line)}
 .band{padding-block:56px}
 .band.alt{background:var(--surface)}
+.band+.band{box-shadow:inset 0 1px 0 var(--line)}
 .band.invert{background:var(--foot-bg);color:var(--foot-ink)}
 .band.invert .eyebrow,.band.invert .caption{color:color-mix(in srgb, var(--foot-ink) 70%, transparent)}
 .sec-head{display:grid;gap:12px;margin-block-end:32px;max-width:52rem}
@@ -185,6 +186,25 @@ h1[tabindex="-1"]:focus-visible,h3[tabindex="-1"]:focus-visible,.confirm:focus-v
 @media (max-width:899px){.steps{border-left:2px solid var(--chrome);padding-left:20px}.steps li::after{display:none}}
 .steps b{font:700 var(--fs-h3)/1.05 var(--font-cond);text-transform:uppercase}
 .steps p{font-size:var(--fs-small);color:var(--ink-2)}
+
+/* drone feature band */
+.band.drone{background:var(--chrome);color:var(--foot-ink)}
+.band.drone .eyebrow,.band.drone .caption{color:var(--gold-light)}
+.band.drone h2{color:var(--foot-ink)}
+.band.drone .measure{color:color-mix(in srgb, var(--foot-ink) 85%, transparent)}
+.drone-grid{display:grid;gap:32px;align-items:center}
+@media (min-width:900px){.drone-grid{grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:48px}}
+.drone-list{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.drone-list li{display:flex;gap:10px;align-items:baseline;font-size:var(--fs-small);color:color-mix(in srgb, var(--foot-ink) 82%, transparent);border-top:1px solid var(--foot-line);padding-top:8px}
+.drone-list li b{color:var(--gold-light);font-weight:600;white-space:nowrap}
+.band.drone .btn-primary{background:var(--gold-light);color:var(--chrome);border-color:var(--gold-light)}
+.band.drone .btn-primary:hover{background:color-mix(in srgb, var(--gold-light), #ffffff 14%)}
+.band.drone .btn-quiet{color:var(--gold-light)}
+.band.drone .btn-quiet:hover{color:var(--foot-ink)}
+.band.drone :focus-visible{outline-color:var(--focus-dark)}
+.band.drone .slot{--scrim:linear-gradient(to top, rgb(27 38 34 / .9), rgb(27 38 34 / .1) 70%);box-shadow:inset 0 0 0 1px var(--foot-line)}
+.band.drone .slot .tag{color:var(--gold-light);border-color:var(--foot-line);background:color-mix(in srgb, var(--chrome) 70%, transparent)}
+.band.drone .slot .plate{color:var(--gold-light);background:color-mix(in srgb, var(--chrome) 78%, transparent)}
 
 /* trust triad */
 .triad{display:grid;gap:24px}

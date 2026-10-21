@@ -1,0 +1,10 @@
+VERIFIED :: SP-01d :: all :: no contour field; tile not written :: claimed=none / absent measured=none / absent :: PER=LENS-03 · client
+VERIFIED :: SP-01d :: home :: no map, key, scale bars, meta lines, datum or dividers :: claimed=0 measured=0/0/0/0/0/0 :: PER=LENS-03 · client
+VERIFIED :: SP-01d :: all :: coverage = Victoria, base = Warragul, Gippsland :: claimed=title/desc/eyebrow/h2/JSON-LD measured="Fitz Feral Hunters · Pest & vermin control, Victoria" · "Warragul, Gippsland · covering all of Victoria" · "Based in Warragul, covering all of Victoria" · Victoria, Australia|Gippsland :: PER=LENS-14 · D1749
+VERIFIED :: SP-01d :: home :: 12 region chips, no grid refs :: claimed=12 / 0 measured=12 / 0 (Gippsland, Latrobe Valley, South Gippsland…) :: PER=D2124 · LENS-14
+VERIFIED :: SP-01d :: home :: one drone band naming the aircraft, gold twin button :: claimed=1 / DJI Matrice 4T / #cdb682 measured=1 / "Thermal drone scouting with a DJI Matrice 4T" / rgb(205, 182, 130) :: PER=D5303 · D3399 · LENS-13 · LAW-15
+VERIFIED :: SP-01d :: home :: "more credentials to come" flag :: claimed=present measured=true :: PER=LENS-02
+VERIFIED :: SP-01d :: services :: #svc-drone names the aircraft, no optional flag; h1 says Victoria :: claimed=true/true/false/Victoria measured=true/true/false/"Pest and vermin control across Victoria" :: PER=LENS-02
+VERIFIED :: SP-01d :: all :: hover census (9) :: claimed=0/0 measured=0/0 :: PER=D3171 · LAW-03
+VERIFIED :: SP-01d :: all (390px) :: no overflow, 17px body :: claimed=ok measured=390≤390, 17px :: PER=D3193
+VERIFIED :: SP-01d :: all :: console/page errors :: claimed=0 measured=0  :: PER=contract

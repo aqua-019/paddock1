@@ -22,10 +22,13 @@ STAMP = "D700 · 4 Oct 2026 · 6511 entries D0001-D6558 · 218 laws · 387 capsu
 X = cites.PADDOCK
 SEED = "fitzferalhunters-paddock"
 ARTIFACT = '--artifact' in sys.argv
+SHEET = bool(S.get('sheet_layer', False))   # the v0.2 topographic layer: off from v0.3.1 at the client's request
+SHEET_KEYS = {'topo', 'meta', 'scalebar', 'map', 'legend'}
 
 def esc(s): return html.escape(str(s), quote=True)
 
 def per(key):
+    if key in SHEET_KEYS and not SHEET: return ''
     ids = list(cites.SHARED.get(key, [])) + list(X.get(key, []))
     ds = [i for i in ids if re.match(r'^D\d{4}$', i)]
     return f' data-per="{" ".join(dict.fromkeys(ds))}"' if ds else ''
@@ -61,6 +64,12 @@ def asset(path):
     return f'data:{mime};base64,' + base64.b64encode(p.read_bytes()).decode()
 css = (CSS.replace('@@TOKENS@@', TOKENS).replace('@@STAMP@@', STAMP).replace('@@GRAIN@@', GRAIN)
           .replace('@@TOPO@@', TOPO_URI).replace('@@SCHEME@@', 'light'))
+if not SHEET:
+    css = re.sub(r'body::after\{[^}]*\}', '', css)                       # the contour/grid field
+    css = css.replace("[data-sheet='off'] body::after{display:none}", '')
+    css = re.sub(r'@media \(max-width:699px\)\{body::after[^}]*\}\}', '', css)
+    css = css.replace('.band.alt{background:color-mix(in srgb, var(--surface) 86%, transparent)}', '')
+    css = css.replace('.tile,.ghost,.field input,.field textarea,.confirm,.summary{background:color-mix(in srgb, var(--bg) 92%, transparent)}', '').replace('.tile{background:color-mix(in srgb, var(--bg) 94%, transparent)}', '')
 css += """
 .varbar .hide{margin-inline-start:4px}
 .varbar[hidden]{display:none}
@@ -75,10 +84,10 @@ def href(key, anchor=''):
 def route_attr(key): return f' data-route="{key}"' if ARTIFACT else ''
 
 TITLES = {
-  "home": (f"{S['name']} · Pest & vermin control, Gippsland", "Professional pest control in Gippsland: deer control, kangaroo culling, pigs, foxes, rabbits and wild dogs for farmers and landholders across regional Victoria. Licensed, insured, humane. Based in Warragul."),
-  "services": (f"Services · {S['name']}", "Deer control, kangaroo culling, feral pigs, foxes, rabbits and wild dogs across Gippsland. Night and thermal work, planned, insured and humane under the Victorian codes."),
+  "home": (f"{S['name']} · Pest & vermin control, Victoria", "Professional pest control across Victoria: deer control, kangaroo culling, pigs, foxes, rabbits and wild dogs for farmers and landholders. Licensed, insured, humane. Based in Warragul, Gippsland."),
+  "services": (f"Services · {S['name']}", "Deer control, kangaroo culling, feral pigs, foxes, rabbits and wild dogs anywhere in Victoria. Night and thermal work, planned, insured and humane under the Victorian codes."),
   "about": (f"About · {S['name']}", f"Based in {S['base']}, working across {S['region']}. Licensed, insured, accountable. AHCPMG304 humane dispatch."),
-  "gallery": (f"Gallery · {S['name']}", "Thermal images, night work, property damage and gear from pest control jobs across Gippsland."),
+  "gallery": (f"Gallery · {S['name']}", "Thermal images, night work, property damage and gear from pest control jobs across Victoria."),
   "contact": (f"Contact · {S['name']}", f"Ring {S['phone_display']} or send an enquiry. Based in {S['base']}, working across {S['region']}."),
 }
 
@@ -90,6 +99,7 @@ SPRITE = '''<svg hidden aria-hidden="true" focusable="false"><symbol id="i-phone
 def ico(name, cls="ico"): return f'<svg class="{cls}" aria-hidden="true"><use href="#{name}"/></svg>'
 
 def north(label="N"):
+    if not SHEET: return ''
     return f'<span class="datum" title="Grid: MGA zone 55, GDA2020"><svg class="north" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-north"/></svg><span>{label} · MGA 55</span></span>'
 
 def scalebar(stack=False, unit='1 km'):
@@ -98,6 +108,7 @@ def scalebar(stack=False, unit='1 km'):
             f'<span class="unit">{unit}</span></figure>')
 
 def meta(sheet, extra=''):
+    if not SHEET: return ''
     return f'<p class="meta"{per("meta")}><b>Sheet</b><span>{esc(sheet)}</span><span class="lead" aria-hidden="true"></span><span>GR <span class="num">{BASE_GR}</span></span><span>MGA 55 · GDA2020</span>{extra}</p>'
 
 def corners():
@@ -159,7 +170,7 @@ def footer():
       <div><h4>Elsewhere</h4><ul><li><a href="{S['instagram']}" target="_blank" rel="noopener">Instagram {esc(S['instagram_handle'])}</a></li><li><a href="{S['facebook']}" target="_blank" rel="noopener">Facebook</a></li><li><a href="{href('contact','enquiry')}"{route_attr('contact')} data-focus="enquiry">Request a quote</a></li></ul></div>
     </div>
     <div class="cred-strip" aria-label="Credentials">{''.join(f'<span>{esc(t)}</span>' for t, _ in S['credentials'][:7])}</div>
-    <div class="margin"{per("topo")}{per("meta")}><svg class="north" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-north"/></svg><span>Grid MGA zone 55 · datum GDA2020</span><span>Contour interval 10 m · index 50 m</span><span>Base GR <span class="num">{BASE_GR}</span></span>{scalebar()}<span>Sheet styling after Victorian 1:25 000 topographic maps · field seed <span class="num">{esc(SEED)}</span></span></div>
+    {f'<div class="margin"{per("topo")}{per("meta")}><svg class="north" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-north"/></svg><span>Grid MGA zone 55 · datum GDA2020</span><span>Contour interval 10 m · index 50 m</span><span>Base GR <span class="num">{BASE_GR}</span></span>{scalebar()}<span>Sheet styling after Victorian 1:25 000 topographic maps · field seed <span class="num">{esc(SEED)}</span></span></div>' if SHEET else ''}
     <div class="legal"><span>&copy; {datetime.date.today().year} {esc(S['name'])}</span><span>{esc(S['base'])} VIC</span><span>ABN {abn}</span><span>Work carried out under Victorian codes of practice</span></div>
   </div>
 </footer>'''
@@ -176,10 +187,10 @@ def varbar():
     return f'''
 <div class="varbar" id="varbar"{per("varbar")} role="region" aria-label="Mockup controls">
   <div class="wrap">
-    <span><strong>D700 mockup · SP-01c PADDOCK v3</strong><span class="long"> · card colourway (green · gold · cream) on the topographic sheet · seed {esc(SEED)}</span></span>
+    <span><strong>D700 mockup · {'SP-01c PADDOCK v0.3' if SHEET else 'SP-01d PADDOCK v0.3.1'}</strong><span class="long"> · card colourway (green · gold · cream){' on the topographic sheet · seed ' + esc(SEED) if SHEET else ' · all of Victoria'}</span></span>
     <span class="grow"></span>
     <button type="button" id="t-motion" aria-pressed="false" title="Emulates the reduced-motion twin (D4980); the real gate is the media query (D3453)"><span class="long">Motion: on</span><span class="short">Motion</span></button>
-    <button type="button" id="t-topo" aria-pressed="true" title="Toggle the contour field and grid (D2410) to compare against v1"><span class="long">Sheet: on</span><span class="short">Sheet</span></button>
+    {'<button type="button" id="t-topo" aria-pressed="true" title="Toggle the contour field and grid (D2410) to compare against v1"><span class="long">Sheet: on</span><span class="short">Sheet</span></button>' if SHEET else ''}
     <button type="button" id="t-xray" aria-pressed="false" title="Outline every component and show the D-ids it honours"><span class="long">X-ray</span><span class="short">X-ray</span></button>
     <button type="button" id="t-spec" command="show-modal" commandfor="spec"><span class="long">Spec sheet</span><span class="short">Spec</span></button>
     <a href="{other}" target="_blank" rel="noopener"><span class="long">Other mockup: </span>Night Shift &rarr;</a>
@@ -188,11 +199,13 @@ def varbar():
 </div>'''
 
 def spec_dialog():
-    spfile = (ROOT / 'docs' / 'SP-01c-ffh-paddock-v3.md')
+    spfile = (ROOT / 'docs' / ('SP-01c-ffh-paddock-v3.md' if SHEET else 'SP-01d-ffh-paddock-v3-1.md'))
     spfile = spfile.read_text() if spfile.exists() else '(SP record not found in docs/)'
     allids = []
     for grp in (cites.SHARED, X, cites.TOP):
-        for k, ids in grp.items(): allids += ids
+        for k, ids in grp.items():
+            if k in SHEET_KEYS and not SHEET: continue
+            allids += ids
     uniq = list(dict.fromkeys(allids))
     d_entries = sorted(i for i in uniq if re.match(r'^D\d{4}$', i))
     laws = sorted((i for i in uniq if i.startswith('LAW-')), key=lambda s: int(s.split('-')[1]))
@@ -205,10 +218,10 @@ def spec_dialog():
     counts = f'''<span>{len(d_entries)} entries</span><span>{len(laws)} laws</span><span>{len(pairs)} pairs</span><span>{len(nopairs)} anti-pairs resolved</span><span>{len(pals)} palette records</span><span>{len(lenses)} doctrine records</span><span>{len(tops)} templates/dynamics/kits</span><span>{len(uniq)} citations total</span>'''
     return f'''
 <dialog class="spec" id="spec"{per("spec")} aria-labelledby="spec-title">
-  <div class="bar"><h2 id="spec-title">SP-01c · PADDOCK v3 · spec sheet</h2><button type="button" class="btn btn-secondary" id="spec-close" aria-label="Close spec sheet">&times;</button></div>
+  <div class="bar"><h2 id="spec-title">{'SP-01c · PADDOCK v0.3' if SHEET else 'SP-01d · PADDOCK v0.3.1'} · spec sheet</h2><button type="button" class="btn btn-secondary" id="spec-close" aria-label="Close spec sheet">&times;</button></div>
   <div class="inner">
     <p class="counts">{counts}</p>
-    <p>Compiled against <span class="mono">{esc(STAMP)}</span>. Every component on the page carries a <span class="mono">data-per</span> attribute naming the records it honours; switch on X-ray and hover any outlined component to read them. The v2 delta adds the topographic sheet layer: a seeded contour field (seed <span class="mono">{esc(SEED)}</span>, same hills on every build), an MGA-style 1 km grid, real zone-55 grid references for the base and every locality, scale bars, a map key, marginalia and photo registration frames. Nothing on the layer animates and no new hue was added.</p>
+    <p>Compiled against <span class="mono">{esc(STAMP)}</span>. Every component on the page carries a <span class="mono">data-per</span> attribute naming the records it honours; switch on X-ray and hover any outlined component to read them. {'The v0.2 topographic sheet layer (seeded contour field, grid, grid references, map) is switched off from v0.3.1 at the client\'s request; the generator keeps it behind <span class="mono">sheet_layer</span> in content/site.json.' if not SHEET else 'The v0.2 delta adds the topographic sheet layer: a seeded contour field, an MGA-style 1 km grid, real zone-55 grid references, scale bars, a map key, marginalia and photo registration frames.'}</p>
     <h3>Templates, dynamics, motion kit</h3><p class="mono">{' · '.join(tops)}</p>
     <h3>Palettes and colour rules</h3><p class="mono">{' · '.join(pals)}</p>
     <h3>Doctrine lenses</h3><p class="mono">{' · '.join(lenses)}</p>
@@ -279,7 +292,7 @@ def legend():
 # ---------------------------------------------------------------- marginalia (facts beside prose)
 NOTES = {
   "services": [
-    ("Sambar", "Introduced to Victoria in the 1860s; now the main deer species across Gippsland's bush edge."),
+    ("Sambar", "Introduced to Victoria in the 1860s; now the main deer species on the state's bush edge."),
     ("Fallow", "In Australia since the 1830s; paddock and plantation damage, often in daylight."),
     ("Foxes", "Released in Victoria in the 1850s for hunting; lambing losses follow the season."),
     ("Rabbits", "Twenty-four released at Barwon Park, Winchelsea, in 1859. The rest is history."),
@@ -287,7 +300,7 @@ NOTES = {
     ("Game Licence", "Issued by the Game Management Authority; deer are a game species in Victoria."),
   ],
   "about": [
-    ("Warragul", f"Base of operations, grid reference {BASE_GR} on the MGA zone 55 grid."),
+    ("Warragul", (f"Base of operations, grid reference {BASE_GR} on the MGA zone 55 grid." if SHEET else "Base of operations in West Gippsland; jobs anywhere in Victoria by arrangement.")),
     ("AHCPMG304", "A nationally recognised unit for humane dispatch; the standard every job is held to."),
     ("Codes", "Victorian codes of practice for the humane control of each species govern the method."),
     ("Insurance", "$20 million public liability, with a certificate of currency available before work starts."),
@@ -300,7 +313,25 @@ def fn(n): return f'<sup class="fn" aria-label="note {n}">{n}</sup>'
 
 # ---------------------------------------------------------------- page bodies
 def divider(label):
+    if not SHEET: return ''
     return f'<div class="wrap divider"{per("scalebar")}><span class="mono">{esc(label)}</span>{scalebar()}</div>'
+
+def drone_band():
+    if not S.get('thermal_drone'): return ''
+    return f'''
+{divider("Thermal drone")}
+<section class="band drone"{per("drone")}>
+  <div class="wrap drone-grid">
+    <div class="stack reveal" style="--gap:16px">
+      <p class="eyebrow">New capability</p>
+      <h2>Thermal drone scouting with a DJI Matrice 4T</h2>
+      <p class="measure">Before a program starts, the drone finds the mob, counts it and maps where it moves, by day or at night. Fewer wasted trips, a better plan, and a record you can keep.</p>
+      <ul class="drone-list"><li><b>Scouting</b> where the deer, pigs or dogs actually are</li><li><b>Counts</b> you can use for permits and planning</li><li><b>Night work</b> ahead of the ground team</li><li><b>Stock and property checks</b> after storms or fire</li></ul>
+      <div class="cta-row"{per("cta")}><a class="btn btn-primary" href="{href('services','svc-drone')}"{route_attr('services')} data-focus="svc-drone">Drone scouting details</a><a class="btn btn-quiet" href="{href('contact','enquiry')}"{route_attr('contact')} data-focus="enquiry">or ask for a quote</a></div>
+    </div>
+    {slot("gear", "DJI Matrice 4T thermal drone on the tailgate", "", ar="4/3")}
+  </div>
+</section>'''
 
 def home_body():
     hp = S['hero_photo']
@@ -322,13 +353,13 @@ def home_body():
         tnote = '<p class="measure small">Three slots, held empty until Fitz supplies quotes with a name, property type and locality. A Google Business reviews link sits here once reviews exist; third-party scores outrank hand-picked quotes. <span class="flag">section hidden until quotes arrive</span></p>'
     status_flag = '' if S.get('credentials_current') else ' <span class="flag">status line Fitz can edit</span>'
     lede_flag = f' <span class="flag">{esc(S["lede_flag"])}</span>' if S.get('lede_flag') else ''
-    chips = ''.join(f'<li>{esc(a)}{"<span class=gr>GR " + GR[a][0] + "</span>" if a in GR else ""}</li>' for a in S['area'])
+    chips = ''.join(f'<li>{esc(a)}{"<span class=gr>GR " + GR[a][0] + "</span>" if (SHEET and a in GR) else ""}</li>' for a in S['area'])
     return f'''
 <section class="hero wrap"{per("hero")}{per("hero-layout")}>
   <div class="hero-grid">
     <div class="stack" style="--gap:22px">
       {meta("Home")}
-      <p class="eyebrow"{per("wordmark")}>{esc(S['base'])} · Gippsland · Regional Victoria</p>
+      <p class="eyebrow"{per("wordmark")}>{esc(S['base'])}, Gippsland · covering all of Victoria</p>
       <h1 id="h-home" tabindex="-1">{esc(S['headline'])}</h1>
       <p class="lede"{per("lede")}>{esc(S['lede'])}{lede_flag}</p>
       <p class="descriptors"{per("brand")}>{' <span aria-hidden="true">·</span> '.join(esc(x) for x in S['descriptors'])}</p>
@@ -345,6 +376,7 @@ def home_body():
       <p class="eyebrow">Licensed · insured · accountable</p>
       <h2>The paperwork is in order before the ute leaves the shed</h2>
       <p class="status"><i aria-hidden="true"></i> {esc(S['status_line'])}{status_flag}</p>
+      <p class="caption"><span class="flag">more credentials to come from Fitz</span> They slot into this wall as plates when they arrive.</p>
     </div>
     <ol class="creds reveal" aria-label="Credentials">{creds_li}</ol>
   </div>
@@ -353,10 +385,11 @@ def home_body():
 <section class="band"{per("services-grid")}>
   <div class="wrap stack" style="--gap:28px">
     <div class="sec-head reveal"><p class="eyebrow">Services</p><h2>What I'm called out for</h2>
-      <p class="measure">Deer and kangaroo work is most of it. The rest is the usual Gippsland list: pigs, foxes, rabbits and wild dogs, night and thermal where it counts.</p></div>
+      <p class="measure">Deer and kangaroo work is most of it. The rest is the usual Victorian list: pigs, foxes, rabbits and wild dogs, night and thermal where it counts.</p></div>
     <div class="grid grid-3">{tiles}</div>
   </div>
 </section>
+{drone_band()}
 {divider("How it works")}
 <section class="band alt"{per("howitworks")}>
   <div class="wrap stack" style="--gap:28px">
@@ -385,10 +418,10 @@ def home_body():
 {divider("Service area")}
 <section class="band"{per("area")}{per("topo")}>
   <div class="wrap stack" style="--gap:24px">
-    <div class="sec-head reveal"><p class="eyebrow">Service area</p><h2>Based in {esc(S['base'])}, working across Gippsland</h2>
-      <p class="measure">West, South and Central Gippsland most weeks. East Gippsland and the rest of regional Victoria by arrangement. Rings are road-free distances from the base; the real trip is longer.</p></div>
-    <div class="area-grid reveal"><div class="map-scroll">{locality_map()}</div>{legend()}</div>
-    <ul class="chips reveal" aria-label="Localities served with grid references">{chips}</ul>
+    <div class="sec-head reveal"><p class="eyebrow">Service area</p><h2>Based in {esc(S['base'])}, covering all of Victoria</h2>
+      <p class="measure">Gippsland is home ground, but the ute goes anywhere in the state: the Latrobe Valley, the Peninsula, the North East, the Western District and everywhere between. Ring and we'll work out the trip.</p></div>
+    {'<div class="area-grid reveal"><div class="map-scroll">' + locality_map() + '</div>' + legend() + '</div>' if SHEET else ''}
+    <ul class="chips reveal" aria-label="Regions served">{chips}</ul>
   </div>
 </section>
 <section class="band invert"{per("strip")}>
@@ -410,13 +443,13 @@ def services_body():
     </article>'''
     rows = ''.join(row(k, t, d, b) for k, t, d, b in S['services'])
     drone = '''
-      <article class="service" id="svc-drone"><div class="stack" style="--gap:8px"><h3 tabindex="-1">Thermal drone services <span class="flag">optional, remove if not offering yet</span></h3><p class="small" style="color:var(--ink-2)">Thermal drone surveys to count animals, find mobs and map where they move before a program starts.</p></div>
-        <ul><li>Pre-program counts</li><li>Finding stock after a storm or fire</li><li>Mapping movement corridors</li></ul></article>''' if S.get('thermal_drone') else ''
+      <article class="service" id="svc-drone"><div class="stack" style="--gap:8px"><h3 tabindex="-1">Thermal drone scouting</h3><p class="small" style="color:var(--ink-2)">A DJI Matrice 4T thermal drone for scouting, counts and night work: find the mob, map where it moves and plan the program before anyone walks in.</p></div>
+        <ul><li>Pre-program counts and mob location</li><li>Night scouting ahead of ground work</li><li>Finding stock after a storm or fire</li><li>Mapping movement corridors and access</li></ul></article>''' if S.get('thermal_drone') else ''
     faqs = ''.join(f'<details class="faq"><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in S['faq'])
     return f'''
 <section class="page" aria-labelledby="h-services"{per("services")}>
   <div class="wrap stack" style="--gap:36px">
-    <div class="sec-head">{meta("Services")}<p class="eyebrow">Services</p><h1 id="h-services" tabindex="-1" style="font-size:var(--fs-h2)">Pest and vermin control, Gippsland and regional Victoria</h1>
+    <div class="sec-head">{meta("Services")}<p class="eyebrow">Services</p><h1 id="h-services" tabindex="-1" style="font-size:var(--fs-h2)">Pest and vermin control across Victoria</h1>
       <p class="measure">Every job is planned, insured and carried out humanely under the relevant Victorian codes of practice. Deer control on farms and kangaroo culling are the two most common call-outs; the rest of the list is below.</p></div>
     <div class="notes-layout">
       <div>{rows}
@@ -447,7 +480,7 @@ def about_body():
       <div class="prose">
         {meta("About")}
         <p class="eyebrow">About</p>
-        <h1 id="h-about" tabindex="-1" style="font-size:var(--fs-h2)">Based in {esc(S['base'])}{fn(1)}, working across Gippsland and regional Victoria</h1>
+        <h1 id="h-about" tabindex="-1" style="font-size:var(--fs-h2)">Based in {esc(S['base'])}{fn(1)}, working across all of Victoria</h1>
         <p>{esc(S['name'])} is one operator, licensed and insured{fn(4)}, doing feral animal control for farmers and landholders who want the job done properly and the place left as they found it.</p>
         <p>The standard is clean, legal and professional: a plan before the first night, humane dispatch to AHCPMG304{fn(2)}, and a short report after. No trophies, no mess, no surprises for the neighbours{fn(3)}.</p>
         <p><span class="flag">one or two lines about Fitz to come</span> Years on farms, where the hunting started, why the thermal kit: in his own words, kept short.</p>
@@ -496,7 +529,7 @@ def contact_body():
       <div class="contact-list"{per("contactline")}>
         <div class="kv"><b>{ico("i-phone")}Phone</b><div class="row"><span class="num" id="c-phone">{S['phone_display']}</span><button type="button" class="copy" data-copy="{S['phone_display']}" aria-label="Copy phone number">Copy</button><a class="btn btn-secondary" href="tel:{S['phone_e164']}">Call</a></div></div>
         <div class="kv"><b>{ico("i-mail")}Email</b><div class="row"><span id="c-email" style="font-size:19px">{S['email']}</span><button type="button" class="copy" data-copy="{S['email']}" aria-label="Copy email address">Copy</button></div></div>
-        <div class="kv"><b>{ico("i-pin")}Based in</b><div class="row"><span style="font-size:19px">{esc(S['base'])}, Gippsland VIC</span><span class="mono" style="color:var(--ink-2)">GR <span class="num">{BASE_GR}</span> · MGA 55</span></div></div>
+        <div class="kv"><b>{ico("i-pin")}Based in</b><div class="row"><span style="font-size:19px">{esc(S['base'])}, Gippsland VIC</span>{'<span class="mono" style="color:var(--ink-2)">GR <span class="num">' + BASE_GR + '</span> · MGA 55</span>' if SHEET else '<span class="mono" style="color:var(--ink-2)">Jobs anywhere in Victoria</span>'}</div></div>
         <div class="kv"{per("socials")}><b>Follow the work</b><div class="socials"><a href="{S['instagram']}" target="_blank" rel="noopener">Instagram {esc(S['instagram_handle'])} {ico("i-ext")}</a><a href="{S['facebook']}" target="_blank" rel="noopener">Facebook · {esc(S['facebook_label'])} {ico("i-ext")} <span class="flag">confirm page URL</span></a></div></div>
       </div>
     </div>
@@ -625,7 +658,7 @@ SCRIPT = r"""
   try{ if(localStorage.getItem('ffh-varbar')==='hidden') vb.hidden=true; }catch(e){}
   th.addEventListener('click',function(){ vb.hidden=true; try{localStorage.setItem('ffh-varbar','hidden')}catch(e){} });
   tm.addEventListener('click',function(){ var off=root.getAttribute('data-motion')==='off'; if(off){root.removeAttribute('data-motion');tm.querySelector('.long').textContent='Motion: on';tm.setAttribute('aria-pressed','false')} else {root.setAttribute('data-motion','off');tm.querySelector('.long').textContent='Motion: off (reduced-motion twin)';tm.setAttribute('aria-pressed','true')} });
-  tt.addEventListener('click',function(){ var off=root.getAttribute('data-sheet')==='off'; if(off){root.removeAttribute('data-sheet');tt.querySelector('.long').textContent='Sheet: on';tt.setAttribute('aria-pressed','true')} else {root.setAttribute('data-sheet','off');tt.querySelector('.long').textContent='Sheet: off (v1 ground)';tt.setAttribute('aria-pressed','false')} });
+  if(tt) tt.addEventListener('click',function(){ var off=root.getAttribute('data-sheet')==='off'; if(off){root.removeAttribute('data-sheet');tt.querySelector('.long').textContent='Sheet: on';tt.setAttribute('aria-pressed','true')} else {root.setAttribute('data-sheet','off');tt.querySelector('.long').textContent='Sheet: off (v1 ground)';tt.setAttribute('aria-pressed','false')} });
   var NAMES=%%NAMES%%;
   tx.addEventListener('click',function(){ var on=root.hasAttribute('data-xray'); if(on){root.removeAttribute('data-xray');tx.setAttribute('aria-pressed','false');[].forEach.call(document.querySelectorAll('[data-per]'),function(el){el.removeAttribute('title')})} else {root.setAttribute('data-xray','');tx.setAttribute('aria-pressed','true');[].forEach.call(document.querySelectorAll('[data-per]'),function(el){el.setAttribute('title',el.getAttribute('data-per').split(' ').map(function(i){return i+' '+(NAMES[i]||'')}).join('\n'))})} });
   if(!('commandForElement' in HTMLButtonElement.prototype)){ ts.addEventListener('click',function(){ if(!spec.open) spec.showModal(); }); }
@@ -640,7 +673,7 @@ def jsonld():
       "description": TITLES['home'][1], "telephone": S['phone_e164'], "email": S['email'], "url": S['url'].rstrip('/') + '/',
       "image": S['url'].rstrip('/') + '/og-1200x630.png',
       "address": {"@type": "PostalAddress", "addressLocality": S['base'], "addressRegion": "VIC", "addressCountry": "AU"},
-      "areaServed": ["Gippsland", "Regional Victoria"], "sameAs": [S['instagram']],
+      "areaServed": ["Victoria, Australia", "Gippsland"], "sameAs": [S['instagram']],
       "knowsAbout": ["Deer control", "Kangaroo culling", "Feral pig control", "Fox control", "Rabbit control", "Wild dog control", "Thermal night work"],
     }, ensure_ascii=False)
 
@@ -652,7 +685,7 @@ def document(key, body, title, desc):
     path = HREF.get(key, '/404')
     canonical = S['url'].rstrip('/') + ('' if path == '/' else path)
     robots = '' if S.get('indexable') else '<meta name="robots" content="noindex, nofollow">\n'
-    sheet_css = css + "\n[data-sheet='off'] body::after{display:none}\n"
+    sheet_css = css + ("\n[data-sheet='off'] body::after{display:none}\n" if SHEET else "\n")
     return f'''<!doctype html>
 <html lang="en-AU">
 <head>
@@ -689,7 +722,7 @@ def artifact_document():
     """Single document for the claude.ai artifact: no skeleton tags, hash-routed sections."""
     sections = ''.join(f'<section data-page="{k}" id="{k}" aria-labelledby="h-{k}">{b}</section>' for k, b in
                        (('home', home_body()), ('services', services_body()), ('about', about_body()), ('gallery', gallery_body()), ('contact', contact_body())))
-    sheet_css = css + "\n[data-sheet='off'] body::after{display:none}\n"
+    sheet_css = css + ("\n[data-sheet='off'] body::after{display:none}\n" if SHEET else "\n")
     return f'''<title>Fitz Feral Hunters Paddock</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="{esc(TITLES['home'][1])}">
@@ -710,7 +743,9 @@ FAVICON = '''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect w
 def main():
     allids = set()
     for grp in (cites.SHARED, X, cites.TOP):
-        for ids in grp.values(): allids.update(ids)
+        for k, ids in grp.items():
+            if k in SHEET_KEYS and not SHEET: continue
+            allids.update(ids)
     n_entries = len([i for i in allids if re.match(r"^D\d{4}$", i)])
     if ARTIFACT:
         out = pathlib.Path(sys.argv[sys.argv.index('--artifact') + 1])
@@ -724,7 +759,8 @@ def main():
         (PUB / ('index.html' if key == 'home' else f'{key}.html')).write_text(document(key, body, t, d))
     (PUB / '404.html').write_text(document('404', notfound_body(), f"Page not found · {S['name']}", "That page isn't here."))
     (PUB / 'favicon.svg').write_text(FAVICON)
-    (PUB / 'topo-tile.svg').write_text(TOPO_SVG)
+    if SHEET: (PUB / 'topo-tile.svg').write_text(TOPO_SVG)
+    elif (PUB / 'topo-tile.svg').exists(): (PUB / 'topo-tile.svg').unlink()
     base = S['url'].rstrip('/'); today = datetime.date.today().isoformat()
     (PUB / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
         ''.join(f'  <url><loc>{base}{"" if h == "/" else h}</loc><lastmod>{today}</lastmod></url>\n' for _, h, _ in PAGES) + '</urlset>\n')

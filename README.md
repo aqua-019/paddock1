@@ -31,6 +31,8 @@ gallery/hero/about entry in `site.json`. Empty string keeps the labelled placeho
 Testimonials: add `["quote", "Name · property type · locality"]` pairs to `testimonials`; the empty-state
 cards disappear once there is at least one.
 
+Design switches: `"sheet_layer": false` keeps the v0.2 topographic layer (contour field, grid, grid references, locality map) off; `"thermal_drone": true` shows the DJI Matrice 4T drone band and service.
+
 Launch switches: set `"indexable": true` (removes `noindex` and opens `robots.txt`), fill `abn`,
 `credentials_current`, and remove `lede_flag` once the Instagram wording is in.
 
